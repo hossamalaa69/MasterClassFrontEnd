@@ -23,7 +23,6 @@ export default {
     "course-card": CourseCard 
   },
   data: () => ({
-    helloMsg: "Hello MasterClass"
   }),
 };
 </script>

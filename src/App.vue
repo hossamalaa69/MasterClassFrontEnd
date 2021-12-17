@@ -1,18 +1,11 @@
 <template>
   <v-app>
-    <browse-courses />
-  </v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>  
 </template>
 
-<script>
-import BrowseCourses from "../src/pages/Learner/BrowseCourses.vue"
+<style lang="scss" scoped>
 
-export default {
-  name: 'App',
-  components: {
-    "browse-courses": BrowseCourses
-  },
-  data: () => ({
-  }),
-};
-</script>
+</style>
