@@ -1,10 +1,9 @@
 <template>
-  <div>
+  <div class="nav-bar-div">
     <v-app-bar
-      app
+      
       color="#FFFFFF" 
-      fixed
-      elevation="3">
+      elevation="4">
       <img
         id="logo-img"
         width="140" height="80"
@@ -26,7 +25,7 @@
         </template>
         <v-list width="300">
           <v-list-item-group>
-            <v-list-item row wrap align-center :to="viewPath">
+            <v-list-item row wrap align-center>
               <v-flex md3>
                 <v-avatar size="35">
                 <img
@@ -48,7 +47,7 @@
                 <span class="spans-menu">Edit Profile</span>
               </v-flex>  
             </v-list-item>
-            <v-list-item row wrap align-center v-on:click="logout">
+            <v-list-item row wrap align-center >
               <v-flex md3>
                 <v-icon class="icons_menu">mdi-export</v-icon>
               </v-flex>
@@ -76,7 +75,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.nav-bar-div{
+  border-bottom: 3px solid #f5f7f8;
+}
 a{
     text-decoration: none;
     color: black;
@@ -90,5 +92,8 @@ a{
 #logo-img{
   margin-left: 3%;
   cursor: pointer;
+}
+#logo-img:hover{
+  opacity: 0.7;
 }
 </style>

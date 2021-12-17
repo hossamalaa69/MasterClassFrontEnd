@@ -1,20 +1,18 @@
 <template>
   <v-app>
-    <navbar />
-    {{helloMsg}}
+    <browse-courses />
   </v-app>
 </template>
 
 <script>
-import Navbar from "../src/components/Navbar.vue"
+import BrowseCourses from "../src/pages/Learner/BrowseCourses.vue"
 
 export default {
   name: 'App',
   components: {
-    "navbar": Navbar
+    "browse-courses": BrowseCourses
   },
   data: () => ({
-    helloMsg: "Hello MasterClass"
   }),
 };
 </script>
