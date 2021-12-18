@@ -46,7 +46,11 @@ This Specialization is designed and taught by two experts in NLP, machine learni
         </div>    
         
         <div id="syllabus-div">
-            Syllabus
+            <h4>
+                Syllabus - What you will learn from this course
+            </h4>
+            <br/>
+            <syllabus-item v-for="index in 4" :key="index" />      
         </div>    
         
         <div id="faq-div">
@@ -57,11 +61,13 @@ This Specialization is designed and taught by two experts in NLP, machine learni
 
 <script>
 import Navbar from "../../components/Navbar.vue"
+import SyllabusItem from "../../components/SyllabusItem.vue"
 
 export default {
   name: 'CourseInfo',
   components: {
     "navbar": Navbar,
+    "syllabus-item": SyllabusItem
   },
   data: () => ({
   }),
@@ -163,11 +169,17 @@ export default {
         white-space: pre-line;
         font-family: Arial, Helvetica, sans-serif;
     }
+    border-bottom: 1px solid #EEE;
     
 }
 #syllabus-div{
-    height: 50vh;
-    background-color: green;
+    padding: 15px 4% 15px 4%;
+    h4{
+        text-align: center;
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 400;
+    }
 }
 #faq-div{
     height: 50vh;
