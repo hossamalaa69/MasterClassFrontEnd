@@ -6,7 +6,7 @@
       elevation="4">
       <img
         id="logo-img"
-        height="50"
+        height="40"
         src="../assets/master_class.svg"
         alt="Logo" />
       <v-spacer></v-spacer>
