@@ -34,7 +34,7 @@
                   alt="John">
                 </v-avatar>
               </v-flex>
-                <v-flex md9> 
+              <v-flex md9> 
                 <span>View Profile</span>
               </v-flex>
             </v-list-item>
