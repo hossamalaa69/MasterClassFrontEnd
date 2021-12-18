@@ -28,9 +28,9 @@
             </div>    
         </div>
         <div class="bookmarks-div"> 
-            <a href="#about-div">About</a>
-            <a href="#syllabus-div">Syllabus</a>
-            <a href="#faq-div">FAQ</a>
+            <a @click="$vuetify.goTo('#about-div', {duration:500})">About</a>
+            <a @click="$vuetify.goTo('#syllabus-div', {duration: 700})">Syllabus</a>
+            <a @click="$vuetify.goTo('#faq-div', {duration: 1000})">FAQ</a>
         </div>
         <div id="about-div">
             <h4>About this course:</h4> 
@@ -203,6 +203,10 @@ export default {
         line-height: 30px;
         font-weight: 400;
     }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 </style>

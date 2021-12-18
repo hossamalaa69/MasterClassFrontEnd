@@ -6,9 +6,9 @@
       elevation="4">
       <img
         id="logo-img"
-        width="140" height="80"
+        height="50"
         src="../assets/master_class.svg"
-        alt="John" />
+        alt="Logo" />
       <v-spacer></v-spacer>
       <v-menu offset-y>
         <template v-slot:activator="{ on, attrs }">
