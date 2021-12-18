@@ -54,7 +54,16 @@ This Specialization is designed and taught by two experts in NLP, machine learni
         </div>    
         
         <div id="faq-div">
-            FAQ
+            <h4>Frequently Asked Questions</h4>
+            <br/>
+            <v-expansion-panels multiple>
+                <v-expansion-panel style="margin-top: 15px" v-for="index in 3" :key="index">
+                    <v-expansion-panel-header>Q{{index}}</v-expansion-panel-header>
+                    <v-expansion-panel-content>
+                       Answer for the question number {{index}}
+                    </v-expansion-panel-content>
+                </v-expansion-panel>
+            </v-expansion-panels>
         </div>    
   </v-app>
 </template>
@@ -150,6 +159,7 @@ export default {
     a{
         text-decoration: none;
         color: #000;
+        font-weight: 500;
         cursor: pointer;
         &:hover{
             text-decoration: underline;
@@ -182,8 +192,17 @@ export default {
     }
 }
 #faq-div{
-    height: 50vh;
-    background-color: blueviolet;
+    padding: 15px 4% 15vh 4%;
+    background-color: #f5f7fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h4{
+        font-size: 24px;
+        line-height: 30px;
+        font-weight: 400;
+    }
 }
 
 </style>
