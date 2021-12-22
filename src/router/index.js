@@ -4,6 +4,7 @@ import BrowseCourses from '../pages/Learner/BrowseCourses.vue'
 import Home from "../pages/Guest/Home.vue"
 import CourseInfo from "../pages/Learner/CourseInfo.vue"
 import CourseContent from "../pages/Learner/CourseContent.vue"
+import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,13 @@ const routes = [
     path: '/courses/content/:course_id',
     name: 'CourseContent',
     component: CourseContent
+  },
+  {
+    path: '/courses/discussions/:course_id',
+    name: 'CourseDiscussions',
+    component: CourseDiscussions
   }
+  
   
 ]
 

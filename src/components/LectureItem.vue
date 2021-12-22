@@ -40,9 +40,10 @@ export default {
   name: 'SyllabusItem',
   components: {
   },
-  data: () => ({
-
-  }),
+  data () {
+        return{
+        }
+  }
 };
 </script>
 

@@ -25,9 +25,10 @@ export default {
   name: 'CourseCard',
   components: {
   },
-  data: () => ({
-
-  }),
+  data () {
+        return{
+        }
+  }
 };
 </script>
 

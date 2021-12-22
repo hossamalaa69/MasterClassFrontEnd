@@ -17,10 +17,10 @@
                         <a style="color:white; margin-left: 15px">Andrew NG</a>
                     </div>
                     <br/>
-                    <button class="btn-open-course">
+                    <button class="btn-open-course" @click="$router.push({path: '/courses/content/' + course_id })">
                         Open Turorial
                     </button>    
-                    <button class="btn-open-course">
+                    <button class="btn-open-course" @click="$router.push({path: '/courses/discussions/' + course_id })">
                         Open Discussion
                     </button>
                 </div>
@@ -58,6 +58,7 @@ This Specialization is designed and taught by two experts in NLP, machine learni
 </template>
 
 <script>
+
 import Navbar from "../../components/Navbar.vue"
 import SyllabusItem from "../../components/SyllabusItem.vue"
 
@@ -67,8 +68,11 @@ export default {
     "navbar": Navbar,
     "syllabus-item": SyllabusItem
   },
-  data: () => ({
-  }),
+  data () {
+        return{
+            course_id: this.$route.params.course_id
+        }
+  }
 };
 </script>
 

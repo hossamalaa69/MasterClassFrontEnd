@@ -13,13 +13,16 @@ import Navbar from "../../components/Navbar.vue"
 import LectureItem from "../../components/LectureItem.vue"
 
 export default {
-  name: 'BrowseCourses',
+  name: 'CourseContent',
   components: {
     "navbar": Navbar,
     "lecture-item": LectureItem
   },
-  data: () => ({
-  }),
+  data () {
+        return{
+            course_id: this.$route.params.course_id
+        }
+  }
 };
 </script>
 

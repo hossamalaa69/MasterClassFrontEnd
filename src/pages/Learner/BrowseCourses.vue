@@ -22,8 +22,10 @@ export default {
     "navbar": Navbar,
     "course-card": CourseCard 
   },
-  data: () => ({
-  }),
+  data () {
+        return{
+        }
+  }
 };
 </script>
 
