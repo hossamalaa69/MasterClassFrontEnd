@@ -20,6 +20,9 @@
                     <button class="btn-open-course">
                         Open Turorial
                     </button>    
+                    <button class="btn-open-course">
+                        Open Discussion
+                    </button>
                 </div>
                 <div class="course-brief-university">
                     <p id="offered-by-p">Offered By</p>
@@ -30,7 +33,6 @@
         <div class="bookmarks-div"> 
             <a @click="$vuetify.goTo('#about-div', {duration:500})">About</a>
             <a @click="$vuetify.goTo('#syllabus-div', {duration: 700})">Syllabus</a>
-            <a @click="$vuetify.goTo('#faq-div', {duration: 1000})">FAQ</a>
         </div>
         <div id="about-div">
             <h4>About this course:</h4> 
@@ -51,19 +53,6 @@ This Specialization is designed and taught by two experts in NLP, machine learni
             </h4>
             <br/>
             <syllabus-item v-for="index in 4" :key="index" />      
-        </div>    
-        
-        <div id="faq-div">
-            <h4>Frequently Asked Questions</h4>
-            <br/>
-            <v-expansion-panels multiple>
-                <v-expansion-panel style="margin-top: 15px" v-for="index in 3" :key="index">
-                    <v-expansion-panel-header>Q{{index}}</v-expansion-panel-header>
-                    <v-expansion-panel-content>
-                       Answer for the question number {{index}}
-                    </v-expansion-panel-content>
-                </v-expansion-panel>
-            </v-expansion-panels>
         </div>    
   </v-app>
 </template>
@@ -130,7 +119,7 @@ export default {
         .btn-open-course{
             background-color: #F65B66;
             color: #FFFFFF;
-            
+            margin-right: 20px;
             font-size: 1.1rem;
             border-radius: 3px;
             height: 50px;
@@ -186,19 +175,6 @@ export default {
     padding: 15px 4% 15px 4%;
     h4{
         text-align: center;
-        font-size: 24px;
-        line-height: 30px;
-        font-weight: 400;
-    }
-}
-#faq-div{
-    padding: 15px 4% 15vh 4%;
-    background-color: #f5f7fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    h4{
         font-size: 24px;
         line-height: 30px;
         font-weight: 400;
