@@ -1,12 +1,11 @@
 <template>
   <v-app>
-    <navbar />
+    <nav-bar-app />
     <div class="applicantProfile">
-      <nav-bar-app />
       <v-container>
         <v-row no-gutters>
           <v-flex md9 lg11>
-            <learners-table />
+            <learners-table-app />
           </v-flex>
         </v-row>
       </v-container>
@@ -19,8 +18,8 @@ import LearnersTable from "../../components/LearnersTable.vue";
 export default {
   name: "Home",
   components: {
-    navbar: Navbar,
-    learnersTable: LearnersTable,
+    'nav-bar-app': Navbar,
+    'learners-table-app': LearnersTable,
   },
 };
 </script>

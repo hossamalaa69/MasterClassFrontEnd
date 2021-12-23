@@ -15,36 +15,31 @@
       :footer-props="{ 'items-per-page-options': [2, 10, 15] }"
       class="elevation-1"
     >
+    <!-- Avatar  -->
+      <template v-slot:[`item.avatar`]="{ item }">
+        <initials-avatar :item="item"></initials-avatar>
+      </template>
+      <template
+        v-for="header in headers.filter((header) =>
+          header.hasOwnProperty('formatter')
+        )"
+        v-slot:[`item.${header.value}`]="{ header, value }"
+      >
+        {{ header.formatter(value) }}
+      </template>
       <template v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ formName }}</v-toolbar-title>
           <v-divider class="mx-4" inset vertical></v-divider>
           <v-spacer></v-spacer>
-          <v-dialog v-model="dialogDelete" max-width="550px">
+          <v-dialog v-model="dialogPromote" max-width="550px">
             <v-card>
               <v-card-title class="text-h5"
-                >Are you sure you want to reject this recruiter?</v-card-title
+                >Are you sure you want to promote this learner?</v-card-title
               >
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete"
-                  >Cancel</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                  >OK</v-btn
-                >
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-          <v-dialog v-model="dialogUpdate" max-width="550px">
-            <v-card>
-              <v-card-title class="text-h5"
-                >Are you sure you want to accept this recruiter?</v-card-title
-              >
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeUpdate"
+                <v-btn color="blue darken-1" text @click="closePromote"
                   >Cancel</v-btn
                 >
                 <v-btn color="blue darken-1" text @click="updateItemConfirm"
@@ -59,14 +54,11 @@
       <template v-slot:[`item.actions`]="{ item }">
         <v-container>
           <v-row>
-            <v-flex md6>
-              <v-icon small class="mr-2" @click="editItem(item)">
-                mdi-check-bold
-              </v-icon>
+            <v-flex md3>
             </v-flex>
             <v-flex md6>
-              <v-icon small @click="deleteItem(item)">
-                mdi-block-helper
+              <v-icon class="mr-2" @click="editItem(item)">
+                mdi-account-arrow-up
               </v-icon>
             </v-flex>
           </v-row>
@@ -85,17 +77,27 @@
   </div>
 </template>
 <script>
+import InitialsAvatar from "./InitialsAvatar.vue";
 export default {
+  components: {
+    "initials-avatar": InitialsAvatar,
+  },
   data: () => ({
-    formName: "learners Applications",
-    dialogDelete: false,
-    dialogUpdate: false,
+    formName: "Learners",
+    dialogPromote: false,
     loadingState: true,
     snackbar: false,
     headers: [
-      { text: "Recruiter linkedIn", sortable: false, value: "linkedIn" },
-      { text: "Recruiter Email", sortable: false, value: "email" },
-      { text: "Actions", value: "actions", sortable: false, width: "15%" },
+      { text: "", sortable: false, value: "avatar", width: "10%" },
+      { text: "First Name", sortable: true, value: "first_name" },
+      { text: "Last Name", sortable: true, value: "last_name" },
+      { text: "Registered At", sortable: true, value: "created_at" , formatter: (value) => {
+        return new Date(value).toLocaleString();
+      }},
+      { text: "Date of Birth", sortable: true, value: "birthday", formatter: (value) => {
+        return new Date(value).toLocaleString();
+      }},
+      { text: "Actions", value: "actions", sortable: false, width: "10%" },
     ],
     learners: [],
     totalCount: 10,
@@ -104,10 +106,10 @@ export default {
     dialog: false,
     snackbarText: "",
     editedItem: {
-      name: "",
+      first_name: "",
     },
     defaultItem: {
-      name: "",
+      first_name: "",
     },
     options: {},
   }),
@@ -121,8 +123,8 @@ export default {
       },
       deep: true,
     },
-    dialogUpdate(val) {
-      val || this.closeUpdate();
+    dialogPromote(val) {
+      val || this.closePromote();
     },
     dialogDelete(val) {
       val || this.closeDelete();
@@ -135,58 +137,29 @@ export default {
     editItem(item) {
       this.editedIndex = this.learners.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialogUpdate = true;
-    },
-    deleteItem(item) {
-      this.editedIndex = this.learners.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
-    },
-    async deleteItemConfirm() {
-      try {
-        this.loadingState = true;
-        await this.$store.dispatch("adminDeleteRecruiter", {
-          userToken: localStorage.getItem("userToken"),
-          ...this.editedItem,
-        });
-        await this.getDataFromApi();
-        this.loadingState = false;
-        this.snackbarText = "Recruiter was rejected.";
-        this.closeDelete();
-      } catch (error) {
-        this.loadingState = false;
-        this.closeDelete();
-        this.snackbar = true;
-        this.snackbarText = "failed to reject recruiter, try again later";
-      }
+      this.dialogPromote = true;
     },
     async updateItemConfirm() {
       try {
         this.loadingState = true;
-        await this.$store.dispatch("adminUpdateRecruiter", {
-          userToken: localStorage.getItem("userToken"),
+        await this.$store.dispatch("adminPromoteLearner", {
+          // userToken: localStorage.getItem("userToken"),
+          userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU3OGYyZDE1MjQ4PiIsImV4cCI6MTY0MDI2NDkyM30.nwPwN_6G21J-H4bbF8XOaBisBLwGU7JYqNjkPCdVdFg`,
           ...this.editedItem,
         });
         await this.getDataFromApi();
         this.loadingState = false;
         this.snackbarText = "Recruiter was accepted successfully.";
-        this.closeUpdate();
+        this.closePromote();
       } catch (error) {
         this.loadingState = false;
-        this.closeUpdate();
+        this.closePromote();
         this.snackbar = true;
         this.snackbarText = "failed to accept recruiter, try again later";
       }
     },
-    closeUpdate() {
-      this.dialogUpdate = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
-    closeDelete() {
-      this.dialogDelete = false;
+    closePromote() {
+      this.dialogPromote = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
@@ -200,28 +173,24 @@ export default {
       this.errorMessage = "";
       try {
         this.options.page = this.options.page ? this.options.page : 1;
-        this.options.itemsPerPage = this.options.itemsPerPage ? this.options.itemsPerPage : 10;
+        this.options.itemsPerPage = this.options.itemsPerPage
+          ? this.options.itemsPerPage
+          : 10;
         this.response = await this.$store.dispatch("adminGetAllLearners", {
           // userToken: localStorage.getItem("userToken"),
           userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU3OGYyZDE1MjQ4PiIsImV4cCI6MTY0MDI2NDkyM30.nwPwN_6G21J-H4bbF8XOaBisBLwGU7JYqNjkPCdVdFg`,
           limit: this.firstLoad ? 10 : this.options.itemsPerPage,
           offset: (this.options.page - 1) * this.options.itemsPerPage,
         });
-        this.items = this.response.items;
-        console.log(this.items);
+        this.items = this.response.data;
         this.loadingState = false;
-        this.learners = this.items;
-        this.totalCount = this.response.total;
+        this.learners = this.items.learners;
+        this.totalCount = this.response.data.count;
         this.firstLoad = false;
       } catch (error) {
         console.log("an error occured");
         this.loadingState = false;
-        if (error.status === "fail") {
-          this.errorMessage = error.msg;
-        } else {
-          this.errorMessage = "Please try again later !";
-        }
-        console.log(error);
+        this.errorMessage = error.errors.message;
       }
     },
   },
