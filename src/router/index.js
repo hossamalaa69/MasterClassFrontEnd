@@ -5,6 +5,7 @@ import Home from "../pages/Guest/Home.vue"
 import CourseInfo from "../pages/Learner/CourseInfo.vue"
 import CourseContent from "../pages/Learner/CourseContent.vue"
 import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
+import AdminHome from "../pages/Admin/AdminHome.vue"
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/courses/discussions/:course_id',
     name: 'CourseDiscussions',
     component: CourseDiscussions
+  },
+  {
+    path: '/admin',
+    name: 'AdminHome',
+    component: AdminHome
   }
   
   
