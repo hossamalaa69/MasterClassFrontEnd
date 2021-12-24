@@ -1,6 +1,6 @@
 <template>
     <div class="thread-card-div"> 
-        <h4> 
+        <h4 v-on:click="openReplies"> 
           Non graded cell runs with error
         </h4>
         <p> 
@@ -36,9 +36,13 @@ export default {
   name: 'ThreadCard',
   components: {
   },
-  data () {
-        return{
-        }
+  data : () => ({
+      thread_id: 122356
+  }),
+  methods: {
+    openReplies: function () {
+      this.$router.push({path: '/courses/discussions/replies/' + this.thread_id}); 
+    }
   }
 };
 </script>

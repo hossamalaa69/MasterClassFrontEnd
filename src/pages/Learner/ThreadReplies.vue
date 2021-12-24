@@ -2,33 +2,7 @@
   <v-app>
       <navbar />
       <div class="discussion-grid"> 
-        
         <div class="tip-new-thread-div"> 
-            
-          <v-card
-              class="mx-auto"
-              width="100%"
-              outlined>
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="text-overline mb-4">
-                    Quick Tips
-                  </div>
-                  <v-list-item-title class="text-h5 mb-1">
-                    Have Any Questions ?
-                  </v-list-item-title>
-                <p>
-                  <br/>
-                  You can first check old questions threads and their replies.
-                  <br/>
-                  <br/>
-                  Didn't find your question? Just start a new one! and you'll find someone who will help you.
-                </p>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card>
-          <br/>
-          <br/>
           <v-card
             class="mx-auto"
             width="100%">
@@ -38,11 +12,10 @@
                 color="teal">
                 <template v-slot:label >
                   <div>
-                    Enter Your Question Here!
+                    Enter Your Reply Here!
                   </div>
                 </template>
             </v-textarea>
-
             <v-card-actions>
               <v-list-item class="grow">
                 <v-list-item-avatar color="#000d6b">
@@ -52,11 +25,9 @@
                     src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                   ></v-img>
                 </v-list-item-avatar>
-
                 <v-list-item-content>
                   <v-list-item-title>Hossam Alaa</v-list-item-title>
                 </v-list-item-content>
-
                 <v-row
                   align="center"
                   justify="end"
@@ -68,13 +39,11 @@
               </v-list-item>
             </v-card-actions>
           </v-card>
-        
-        
         </div>    
+
         <div class="course-disc-div"> 
-          <h4> Discussion Forums </h4>
-        
-          <thread-view v-for="index in 7" :key="index" />
+          <h4> Non graded cell runs with error </h4>
+          <reply-view v-for="index in 3" :key="index" />
         </div>  
       </div>
   </v-app>
@@ -82,17 +51,17 @@
 
 <script>
 import Navbar from "../../components/Navbar.vue"
-import Thread from "../../components/Thread.vue"
+import Reply from "../../components/Reply.vue"
 
 export default {
-  name: 'CourseDiscussion',
+  name: 'ThreadReplies',
   components: {
     "navbar": Navbar,
-    "thread-view": Thread
+    "reply-view": Reply
   },
   data () {
         return{
-            course_id: this.$route.params.course_id
+            thread_id: this.$route.params.thread_id
         }
   }
 };
@@ -134,9 +103,9 @@ export default {
     align-items: center;
     justify-content: flex-start;
     h4{
-      color: rgb(31, 31, 31);
-      font-size: 1.75rem;
-      line-height: 2.25rem;
+      color: #0062e4;
+      font-size: 1.5rem;
+      line-height: 2.0rem;
       font-family: Arial, sans-serif;
       font-weight: 600;
       letter-spacing: -0.1px;
