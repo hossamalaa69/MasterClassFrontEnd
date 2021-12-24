@@ -16,9 +16,9 @@
             v-bind="attrs"
             v-on="on"
             icon id="user-img">
-          <v-avatar size="35">
+          <v-avatar size="40" color="#000d6b">
             <img
-              src="../assets/profile.png"
+              src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
               alt="John">
           </v-avatar>
           </v-btn>           
@@ -27,10 +27,10 @@
           <v-list-item-group>
             <v-list-item row wrap align-center>
               <v-flex md3>
-                <v-avatar size="35">
+                <v-avatar size="35" color="#000d6b">
                 <img
                   width="35" height="35"
-                  src="../assets/profile.png"
+                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                   alt="John">
                 </v-avatar>
               </v-flex>
