@@ -7,6 +7,8 @@ import CourseContent from "../pages/Learner/CourseContent.vue"
 import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
 import AdminHome from "../pages/Admin/AdminHome.vue"
 
+import SignUp from "../pages/UserManagement/SignUp.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,6 +41,11 @@ const routes = [
     path: '/admin',
     name: 'AdminHome',
     component: AdminHome
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp
   }
   
   
