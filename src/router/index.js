@@ -8,6 +8,8 @@ import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
 import ThreadReplies from "../pages/Learner/ThreadReplies.vue"
 import AdminHome from "../pages/Admin/AdminHome.vue"
 
+import SignUp from "../pages/UserManagement/SignUp.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -45,6 +47,11 @@ const routes = [
     path: '/admin',
     name: 'AdminHome',
     component: AdminHome
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUp
   }
   
   
