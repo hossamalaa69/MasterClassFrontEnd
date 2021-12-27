@@ -59,7 +59,6 @@
             id="backerr-alert" 
             v-if="errorMessage"
             dense
-            outlined
             type="error">
                 {{ errorMessage }}
             </v-alert>
@@ -150,8 +149,8 @@ export default {
       catch (error) {
         this.loadingState = false;
         console.log("an error occured")
-        if(error.status === "fail") {
-          this.errorMessage = error.msg
+        if(error.status === "error") {
+          this.errorMessage = error.errors.message
         }
         else {
           this.errorMessage = "Please try again later !"

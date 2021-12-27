@@ -80,12 +80,14 @@ const actions = {
                     localStorage.setItem("userEmail", res.user.email);
                     localStorage.setItem("name", res.user.name);
                     localStorage.setItem("username", res.user.user_name);
+                    localStorage.setItem("userType", res.user.type);
 
-                    resolve("learner");
+                    resolve(res.user.type);
                 })
                 .catch(error => {
-                    console.log(error)
-                    reject(error.response.data);
+                    let err = error.response.data
+                    console.log(err)
+                    reject(err);
                 });
         });
     },
