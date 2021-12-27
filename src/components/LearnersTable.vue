@@ -143,8 +143,8 @@ export default {
       try {
         this.loadingState = true;
         await this.$store.dispatch("adminPromoteLearner", {
-          // userToken: localStorage.getItem("userToken"),
-          userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU3OGYyZDE1MjQ4PiIsImV4cCI6MTY0MDI2NDkyM30.nwPwN_6G21J-H4bbF8XOaBisBLwGU7JYqNjkPCdVdFg`,
+          userToken: localStorage.getItem("userToken"),
+          // userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU1ZTViNjQzN2EwPiIsImV4cCI6MTY0MDM3ODI4N30.En_RXd7i-2c5I0IvyON1zl0AkIsOffeFONIvyflPoBU`,
           ...this.editedItem,
         });
         await this.getDataFromApi();
@@ -177,15 +177,14 @@ export default {
           ? this.options.itemsPerPage
           : 10;
         this.response = await this.$store.dispatch("adminGetAllLearners", {
-          // userToken: localStorage.getItem("userToken"),
-          userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU3OGYyZDE1MjQ4PiIsImV4cCI6MTY0MDI2NDkyM30.nwPwN_6G21J-H4bbF8XOaBisBLwGU7JYqNjkPCdVdFg`,
+          userToken: localStorage.getItem("userToken"),
+          // userToken: `eyJhbGciOiJIUzI1NiJ9.eyJpZCI6NCwicm9sZSI6IiM8QWRtaW46MHgwMDAwNTU1ZTViNjQzN2EwPiIsImV4cCI6MTY0MDM3ODI4N30.En_RXd7i-2c5I0IvyON1zl0AkIsOffeFONIvyflPoBU`,
           limit: this.firstLoad ? 10 : this.options.itemsPerPage,
           offset: (this.options.page - 1) * this.options.itemsPerPage,
         });
-        this.items = this.response.data;
         this.loadingState = false;
-        this.learners = this.items.learners;
-        this.totalCount = this.response.data.count;
+        this.learners = this.response.data.learners;
+        this.totalCount = this.response.total;
         this.firstLoad = false;
       } catch (error) {
         console.log("an error occured");
