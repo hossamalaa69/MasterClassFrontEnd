@@ -7,9 +7,8 @@
                 <v-row justify="center" justify-md="center">
                 <v-col cols="12">
                     <v-row justify="center">
-                        <div class="text-h4 white--text mt-6"> Welcome to MasterClass !</div>
                     </v-row>
-                    <v-row justify="center">
+                    <v-row justify="center" class="mt-6">
                         <v-img
                             src="../../assets/signup.png"
                             max-width="50%"
@@ -264,7 +263,7 @@ export default {
             },
             passwordRules: [
                 (value) => !!value || 'Please enter Your password.',
-                (value) => (value && value.length >= 8) || 'minimum 6 characters',
+                (value) => (value && value.length >= 8) || 'minimum 8 characters',
             ],
             confirmPasswordRules: [
                 (value) => !!value || 'Please enter the confirm password',

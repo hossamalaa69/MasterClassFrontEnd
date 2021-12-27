@@ -32,7 +32,6 @@ const actions = {
                     resolve();
                 })
                 .catch(error => {
-                    console.log(error.response)
                     reject(error.response.data);
                 });
             }
@@ -59,11 +58,35 @@ const actions = {
                     resolve();
                 })
                 .catch(error => {
-                    console.log(error)
                     reject(error.response.data);
                 });
             }
 
+        });
+    },
+    // an action to handle user logging in
+    loginUser({state}, payload) {
+        return new Promise((resolve, reject) => {
+            //send a post request with the user data to the database
+            axios
+                .post("/v1/signin", {
+                    email: payload.email,
+                    password: payload.password,
+                })
+                .then(response => {
+                    let res = response.data.data
+                    localStorage.setItem("userToken", res.access_tokn);
+                    localStorage.setItem("userBirthday", res.user.birthday);
+                    localStorage.setItem("userEmail", res.user.email);
+                    localStorage.setItem("name", res.user.name);
+                    localStorage.setItem("username", res.user.user_name);
+
+                    resolve("learner");
+                })
+                .catch(error => {
+                    console.log(error)
+                    reject(error.response.data);
+                });
         });
     },
 }

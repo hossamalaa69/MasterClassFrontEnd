@@ -1,9 +1,9 @@
 <template>
-  <div class="signup">
+  <div class="login">
     <v-container fluid fill-height>
       <v-spacer></v-spacer>
       <v-col cols="12" md="5">
-        <signup-form />
+        <login-form />
       </v-col>
       <v-spacer></v-spacer>
     </v-container>
@@ -11,18 +11,17 @@
 </template>
 
 <script>
-import SignupForm from "../../components/UserManagement/SignUpForm.vue";
-
+import LoginForm from "../../components/UserManagement/LoginForm.vue";
 export default {
-  name: "SignUp",
+  name: "Login",
   components: {
-    SignupForm,
+    LoginForm,
   },
 };
 </script>
 
-<style>
-.signup {
+<style scoped>
+.login {
   background-color: #1E3163;
 }
 </style>

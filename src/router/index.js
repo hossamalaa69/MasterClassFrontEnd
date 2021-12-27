@@ -9,6 +9,7 @@ import ThreadReplies from "../pages/Learner/ThreadReplies.vue"
 import AdminHome from "../pages/Admin/AdminHome.vue"
 
 import SignUp from "../pages/UserManagement/SignUp.vue"
+import Login from "../pages/UserManagement/Login.vue"
 
 Vue.use(VueRouter)
 
@@ -52,6 +53,11 @@ const routes = [
     path: '/signup',
     name: 'SignUp',
     component: SignUp
+  },
+  {
+    path: '/Login',
+    name: 'Login',
+    component: Login
   }
   
   
