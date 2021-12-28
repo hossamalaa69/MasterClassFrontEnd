@@ -7,7 +7,7 @@
       <img
         id="logo-img"
         height="40"
-        src="../assets/master_class.svg"
+        src=""
         alt="Logo" />
       <v-spacer></v-spacer>
       <v-menu offset-y>
@@ -76,11 +76,13 @@ export default {
 </script>
 
 <style scoped>
+
 .nav-bar-div{
+  z-index: 5000;
   border-bottom: 3px solid #f5f7f8;
 }
 a{
-    text-decoration: none;
+  text-decoration: none;
     color: black;
 }
 .spans-menu{
@@ -92,8 +94,20 @@ a{
 #logo-img{
   margin-left: 3%;
   cursor: pointer;
+  content:url("../assets/master_class_minified.svg");
+  border-radius: 50%;
+  background-color: #F8F8F8;
 }
 #logo-img:hover{
   opacity: 0.7;
+}
+@media only screen and (min-width: 768px) {
+  #logo-img{
+    margin-left: 3%;
+    cursor: pointer;
+    content:url("../assets/master_class.svg");
+    border-radius: 0;
+    background-color: transparent;
+  }
 }
 </style>

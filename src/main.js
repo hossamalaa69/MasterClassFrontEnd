@@ -9,7 +9,7 @@ Vue.config.productionTip = false
 
 //configure axios base url
 axios.defaults.baseURL = 'http://localhost:3000/api'
-
+Vue.use(vuetify)
 new Vue({
   vuetify,
   store,
