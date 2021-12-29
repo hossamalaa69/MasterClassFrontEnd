@@ -11,6 +11,8 @@ import AdminHome from "../pages/Admin/AdminHome.vue"
 import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
 
+import Profile from "../pages/UserManagement/Profile.vue"
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -58,6 +60,11 @@ const routes = [
     path: '/Login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile
   }
   
   

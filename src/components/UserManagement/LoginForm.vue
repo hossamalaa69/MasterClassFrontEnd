@@ -69,7 +69,7 @@
           <v-col cols="10">
             <v-btn
               block
-              color="#000D6B"
+              color="#F037A5"
               type="submit"
               large
               class="white--text"
