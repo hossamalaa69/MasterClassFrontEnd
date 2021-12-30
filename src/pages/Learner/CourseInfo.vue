@@ -40,7 +40,7 @@
                 Syllabus - What you will learn from this course
             </h4>
             <br/>
-            <syllabus-item v-for="index in 4" :key="index" />      
+            <syllabus-item v-for="week in syllabus" :key="week.activity_name" :week="week"/>      
         </div>    
   </v-app>
 </template>
@@ -75,7 +75,7 @@ export default {
             //console.log(this.response.data);
             this.course = this.response.data;
             this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
-            console.log("Get Course response");
+            //console.log("Get Course response");
             console.log(this.course);
             try{
                 this.response = await this.$store.dispatch("getSyllabus", {
@@ -83,9 +83,9 @@ export default {
                     id: this.course_id
                 });
                 //console.log(this.response.data);
-                this.syllabus = this.response.data;
-                console.log("Get Syallabus response");
-                console.log(this.syllabus);
+                this.syllabus = this.response.data.courses;
+                //console.log("Get Syallabus response");
+                //console.log(this.syllabus);
                 this.loadingState = false;
             } 
             catch (error) {
@@ -178,7 +178,7 @@ export default {
 
 #about-div{
     
-    padding: 15px 20% 15px 4%;
+    padding: 35px 20% 50px 4%;
     h4{
         font-size: 24px;
         line-height: 30px;

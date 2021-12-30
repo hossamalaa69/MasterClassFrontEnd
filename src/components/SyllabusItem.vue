@@ -1,24 +1,23 @@
 <template>
     <div class="syllabus-container">
         <div class="week-div">
-            <p>LECTURE</p>
-            <span>1</span>
+            <p>{{week.activity_name}}</p>
         </div>
         <div class="brief-div">
-            <p id="week-topic-p">Sentiment Analysis with Logistic Regression </p>
+            <p id="week-topic-p">{{week.activity_description}}</p>
             
             <div class="horizontal-content-div">
                 <div class="circle-div1">
                     <v-icon class="icon-white">mdi-clock</v-icon>
                 </div>                
-                <p>13 Videos</p>
+                <p>{{week.links.length}} Videos</p>
             </div>    
 
             <div class="horizontal-content-div">
                 <div class="circle-div2"> 
                     <v-icon class="icon-white">mdi-book-open-variant</v-icon>
                 </div>
-                <p>2 Readings</p>
+                <p>{{week.pdfs.length}} Readings</p>
             </div>
         </div>        
     </div>    
@@ -33,7 +32,14 @@ export default {
   data () {
         return{
         }
-  }
+  },
+   props: {
+       week: Object
+    },
+    mounted (){
+        console.log("current syllabus");
+        console.log(this.week);
+    }
 };
 </script>
 
@@ -53,7 +59,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: center;
         p{
             letter-spacing: 4px;
             color: #000;

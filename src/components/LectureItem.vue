@@ -1,20 +1,21 @@
 <template>
     <div class="syllabus-container">
         <div class="week-div">
-            <p>LECTURE</p>
-            <span>1</span>
+            <p>{{lecture.activity_name}}</p>
         </div>
         <div class="content-lecture-div">
-            <p id="week-topic-p">Sentiment Analysis with Logistic Regression </p>
+            <p id="week-topic-p">{{lecture.activity_description}}</p>
             <div class="horizontal-content-div">
                 <div class="circle-div1">
                     <v-icon class="icon-white">mdi-clock</v-icon>
                 </div>                
-                <p>5 Videos</p>
+                <p>{{links.length}} Videos</p>
             </div>    
             <div class="content-grid-div"> 
-                <iframe v-for="index in 5" :key="index" 
-                    src="https://www.youtube.com/embed/1ksjdlA4i9A" 
+                <iframe 
+                    v-for="link in links" 
+                    :key="link" 
+                    :src="link" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
@@ -25,10 +26,16 @@
                 <div class="circle-div2"> 
                     <v-icon class="icon-white">mdi-book-open-variant</v-icon>
                 </div>
-                <p>4 Reading Materials</p>
+                <p>{{pdfs.length}} Reading Materials</p>
             </div>
             <div class="content-grid-div"> 
-                <a href="https://arxiv.org/pdf/1704.04368.pdf" target="_blank" download v-for="index in 4" :key="index">Part {{index}}</a>    
+                <a 
+                v-for="(pdf, index) in pdfs" 
+                :key="index"
+                :href="pdf" 
+                download>
+                    PDF {{index+1}}
+                </a>    
             </div>
         </div>        
     </div>    
@@ -42,7 +49,20 @@ export default {
   },
   data () {
         return{
+            links: [],
+            pdfs: []
         }
+  },
+  props: {
+      lecture: Object
+  },
+  mounted(){
+      console.log("This lecture is:");
+      console.log(this.lecture);
+      this.links = this.lecture.links;
+      this.pdfs = this.lecture.pdfs;
+      for(const [i, pdf] of this.pdfs.entries())
+          this.pdfs[i] = "http://localhost:3000" + pdf;      
   }
 };
 </script>
@@ -77,9 +97,9 @@ export default {
         p{
             letter-spacing: 4px;
             color: #000;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             line-height: 1.5rem;
-            font-weight: normal;
+            font-weight: 400;
             font-family: OpenSans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
         span{
