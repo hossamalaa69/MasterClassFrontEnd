@@ -25,9 +25,6 @@
                     src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
                   ></v-img>
                 </v-list-item-avatar>
-                <v-list-item-content>
-                  <v-list-item-title>Hossam Alaa</v-list-item-title>
-                </v-list-item-content>
                 <v-row
                   align="center"
                   justify="end"

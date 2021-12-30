@@ -6,7 +6,7 @@
             <p>Welcome back!</p>
         </div>
         <div class="courses-div">
-            <course-card v-for="course in courses" :key="course"/>
+            <course-card v-for="course in courses" :key="course.name" :course=course />
         </div>
       </div>
   </v-app>

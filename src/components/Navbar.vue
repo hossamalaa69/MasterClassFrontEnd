@@ -5,7 +5,7 @@
       color="#FFFFFF" 
       elevation="4">
       <img
-        @click="$router.push('/')"
+        @click="routeToHome"
         id="logo-img"
         height="40"
         src=""
@@ -85,6 +85,22 @@ export default {
         localStorage.clear();
         this.$router.push({path: '/login'})
     },
+    routeToHome: function(){
+      console.log("Routing User to");
+      if (localStorage.getItem("userToken") !== null) {
+          console.log("Logged User");
+          const userType = localStorage.getItem("userType");
+          if(userType == "learner")
+              this.$router.push({path: '/courses'});  
+          else if(userType == "instructor")
+              this.$router.push({path: '/instructordashboard'})
+          else  
+              this.$router.push({path: '/admin'})
+      }else{
+          console.log("Unlogged User");
+          this.$router.push({path: '/'})
+      }
+    }
   },
   mounted() {
     this.userToken = localStorage.getItem("userToken");

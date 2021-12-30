@@ -4,17 +4,16 @@
         <div class="course-info-div">
             <div class="course-brief">
                 <div class="course-brief-content">
-                    <p id="course-cat-p">AI Category</p>
-                    <p id="course-name-p">Natural Language Processing with Classification and Vector Spaces</p>
+                    <p id="course-name-p">{{course.name}}</p>
                     <br/>
                     <div>
                         <v-avatar size="50">
                             <img
                                 width="50" height="50"
-                                src="../../assets/profile2.png"
-                                alt="John">
+                                :src="course.instructor_image"
+                                alt="Instructor Image">
                         </v-avatar>
-                        <a style="color:white; margin-left: 15px">Andrew NG</a>
+                        <a style="color:white; margin-left: 15px">{{course.instructor_user_name}}</a>
                     </div>
                     <br/>
                     <button class="btn-open-course" @click="$router.push({path: '/courses/content/' + course_id })">
@@ -24,10 +23,6 @@
                         Open Discussion
                     </button>
                 </div>
-                <div class="course-brief-university">
-                    <p id="offered-by-p">Offered By</p>
-                    <p id="univ-name-p">Stanford University</p>
-                </div>    
             </div>    
         </div>
         <div class="bookmarks-div"> 
@@ -37,14 +32,7 @@
         <div id="about-div">
             <h4>About this course:</h4> 
             <br/>   
-            <pre>In Course 1 of the Natural Language Processing Specialization, you wil learn 
-
-a) Perform sentiment analysis of tweets using logistic regression and then naïve Bayes, 
-b) Use vector space models to discover relationships between words and use PCA to reduce the dimensionality of the vector space and visualize those relationships, and
-c) Write a simple English to French translation algorithm using pre-computed word embeddings and locality-sensitive hashing to relate words via approximate k-nearest neighbor search
-By the end of this Specialization, you will have designed NLP applications that perform question-answering and sentiment analysis, created tools to translate languages and summarize text, and even built a chatbot!
-This Specialization is designed and taught by two experts in NLP, machine learning, and deep learning. Younes Bensouda Mourri is an Instructor of AI at Stanford University who also helped build the Deep Learning Specialization. Łukasz Kaiser is a Staff Research Scientist at Google Brain and the co-author of Tensorflow, the Tensor2Tensor and Trax libraries, and the Transformer paper.
-            </pre>
+            <pre>{{course.about}}</pre>
         </div>    
         
         <div id="syllabus-div">
@@ -52,7 +40,7 @@ This Specialization is designed and taught by two experts in NLP, machine learni
                 Syllabus - What you will learn from this course
             </h4>
             <br/>
-            <syllabus-item v-for="index in 4" :key="index" />      
+            <syllabus-item v-for="week in syllabus" :key="week.activity_name" :week="week"/>      
         </div>    
   </v-app>
 </template>
@@ -70,9 +58,50 @@ export default {
   },
   data () {
         return{
-            course_id: this.$route.params.course_id
+            course_id: this.$route.params.course_id,
+            course: {},
+            syllabus: {},
+            response: {},
+            loadingState: true
         }
-  }
+  },
+    async mounted(){
+        console.log("Mounted Course page");
+        try{
+            this.response = await this.$store.dispatch("getCourse", {
+                userToken : localStorage.getItem('userToken'),
+                id: this.course_id
+            });
+            //console.log(this.response.data);
+            this.course = this.response.data;
+            this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+            //console.log("Get Course response");
+            console.log(this.course);
+            try{
+                this.response = await this.$store.dispatch("getSyllabus", {
+                    userToken : localStorage.getItem('userToken'),
+                    id: this.course_id
+                });
+                //console.log(this.response.data);
+                this.syllabus = this.response.data.courses;
+                //console.log("Get Syallabus response");
+                //console.log(this.syllabus);
+                this.loadingState = false;
+            } 
+            catch (error) {
+                console.log("an error occured in get syllabus")
+                this.loadingState = false
+                console.log(error);
+            }
+            this.loadingState = false;
+        } 
+        catch (error) {
+            console.log("an error occured")
+            this.loadingState = false
+            console.log(error);
+        }
+    }
+
 };
 </script>
 
@@ -88,7 +117,7 @@ export default {
         width: 100%;
         background-image: linear-gradient(90deg, #164d5b, #34abcc);
         display: grid;
-        grid-template-columns: 65% 35%;
+        grid-template-columns: 80% 20%;
         column-gap: 3%;
         padding-top: 3%;
         padding-bottom: 3%;
@@ -105,19 +134,6 @@ export default {
                 font-weight: 700;
                 font-size: 2.2rem;
                 line-height: 46px;                
-            }
-        }
-        .course-brief-university{
-            #offered-by-p{
-                color: white;
-                font-size: 0.9rem;
-            }
-            #univ-name-p{
-                font-family: Arial,sans-serif;
-                color: white;
-                font-weight: 500;
-                font-size: 2.0rem;
-                line-height: 46px;
             }
         }
         .btn-open-course{
@@ -162,7 +178,7 @@ export default {
 
 #about-div{
     
-    padding: 15px 20% 15px 4%;
+    padding: 35px 20% 50px 4%;
     h4{
         font-size: 24px;
         line-height: 30px;
