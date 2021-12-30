@@ -5,9 +5,24 @@
         <div class="welcome-div">
             <p>Welcome back!</p>
         </div>
-        <div class="courses-div">
+        <div class="text-center"  v-if="loadingState">
+            <v-progress-circular
+                indeterminate
+                color="primary"
+            ></v-progress-circular>
+        </div>
+        <div class="courses-div"  v-if="!loadingState">
             <course-card v-for="course in courses" :key="course.name" :course=course />
         </div>
+        <v-alert
+            v-if="!loadingState && !courses.length"            
+            border="left"
+            color="indigo"
+            dark
+            style="text-align: center"
+            width="100%"
+            > Empty Courses for now!
+        </v-alert>
       </div>
   </v-app>
 </template>

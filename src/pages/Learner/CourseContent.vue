@@ -1,10 +1,25 @@
 <template>
   <v-app>
       <navbar />
-      <div class="course-content-div">
+          
+       <div class="text-center" v-if="loadingState">
+              <v-progress-circular
+                  indeterminate
+                  color="primary"
+              ></v-progress-circular>
+      </div>
+      <div class="course-content-div" v-if="!loadingState">
           <lecture-item v-for="lecture in syllabus" :key="lecture.activity_name" :lecture="lecture"/>
       </div>
-
+      <v-alert
+          v-if="!loadingState && !syllabus.length"            
+          border="left"
+          color="indigo"
+          dark
+          style="text-align: center"
+          width="100%"
+          > Empty Tutorial for now!
+      </v-alert>
   </v-app>
 </template>
 

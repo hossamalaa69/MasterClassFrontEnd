@@ -37,10 +37,24 @@
             </v-card-actions>
           </v-card>
         </div>    
-
-        <div class="course-disc-div"> 
+        <div class="text-center" v-if="loadingState">
+              <v-progress-circular
+                  indeterminate
+                  color="primary"
+              ></v-progress-circular>
+        </div>
+        <div class="course-disc-div"  v-if="!loadingState"> 
           <h4> {{parent_body}} </h4>
-          <reply-view v-for="reply in replies" :key="reply.id" :reply="reply" />
+          <reply-view v-for="reply in replies" :key="reply.id" :reply="reply" />    
+          <v-alert
+              v-if="!loadingState && !replies.length"            
+              border="left"
+              color="indigo"
+              dark
+              style="text-align: center"
+              width="100%"
+              > No replies yet in this thread!
+          </v-alert>
         </div>  
       </div>
   </v-app>

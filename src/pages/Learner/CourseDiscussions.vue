@@ -63,12 +63,25 @@
               </v-list-item>
             </v-card-actions>
           </v-card>
-        
-        
         </div>    
-        <div class="course-disc-div"> 
+        <div class="text-center" v-if="loadingState">
+              <v-progress-circular
+                  indeterminate
+                  color="primary"
+              ></v-progress-circular>
+        </div>
+        <div class="course-disc-div" v-if="!loadingState"> 
           <h4> Discussion Forums </h4>
-          <thread-view v-for="thread in threads" :key="thread.id" :thread=thread />
+          <thread-view v-for="thread in threads" :key="thread.id" :thread=thread />    
+          <v-alert
+              v-if="!loadingState && !threads.length"            
+              border="left"
+              color="indigo"
+              dark
+              style="text-align: center"
+              width="100%"
+              > No Discussions yet in this course!
+          </v-alert>
         </div>  
       </div>
   </v-app>
