@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container">
+  <div class="card-container" @click="handleCourseClick">
       <div class="div-float">
             <img
                 :src="course.instructor_image"
@@ -36,6 +36,12 @@ export default {
       //console.log(this.course)
       //this.course.image = "http://localhost:3000" + this.course.image;
       this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+  },
+  methods: {
+      handleCourseClick: function(){
+        console.log("Course clicked " + this.course.id);
+        this.$router.push({path: '/courses/info/'+this.course.id});
+      }
   }
 };
 </script>

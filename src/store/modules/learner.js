@@ -19,7 +19,28 @@ const actions = {
                 reject(error.response.data);
             })
         })
-    }
+    },
+    getCourse({ state }, payload) {
+        console.log("Get course API Payload");
+        console.log(payload);
+        return new Promise((resolve, reject) => {
+            axios.get('/v1/course',
+            {
+                headers: {
+                  Authorization: `Bearer ${payload.userToken}`
+                },
+                params: {
+                    id: payload.id
+                }
+            })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error.response.data);
+            })
+        })
+    },
 }
 
 export default {
