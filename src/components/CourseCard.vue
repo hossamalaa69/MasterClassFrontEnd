@@ -2,18 +2,17 @@
   <div class="card-container">
       <div class="div-float">
             <img
-                src="../assets/stanford.png"
+                :src="course.instructor_image"
                 style = "width: 100%; max-width: 100%; height: 100%; max-height: 100%"
             />
        </div>
       <div class="course-card-div">
-          <img
-            src="../assets/ai_class.png"
-            style = "width: 100%; max-width: 100%; height: 100%; max-height: 100%"
+          <div                 
+                style = "width: 100%; max-width: 100%; height: 100%; max-height: 100%;background-color:#1f6373"
           />
           <div class="course-info-div">
-              <p id="course-name">AI For Everyone</p>
-              <p id="university-name">Stanford University</p>
+              <p id="course-name">{{course.name}}</p>
+              <p id="instr-name">{{course.instructor_user_name}}</p>
           </div>
       </div>
     </div>    
@@ -28,6 +27,15 @@ export default {
   data () {
         return{
         }
+  },
+  props: {
+        course: Object
+  },
+  mounted(){
+      //console.log("Course Card Mounted");
+      //console.log(this.course)
+      //this.course.image = "http://localhost:3000" + this.course.image;
+      this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
   }
 };
 </script>
@@ -48,7 +56,7 @@ export default {
     }
     .course-card-div{
         //width: 20%;
-        height: 52vh;
+        height: 380px;
         background-color: white;
         transition: box-shadow 0.2s;
         cursor: pointer;
@@ -61,9 +69,10 @@ export default {
         }
         .course-info-div{
             padding-top: 50px;
-            padding-left: 10%;
+            padding-left: 7%;
+            padding-right: 7%;
             #course-name{
-                font-size: 1.3rem;
+                font-size: 1.2rem;
                 line-height: 1.75rem;
                 font-family: Source Sans Pro,Arial,sans-serif;
                 font-weight: 600;
@@ -73,7 +82,7 @@ export default {
                     font-size: 1rem;
                 }
             }
-            #university-name{
+            #instr-name{
                 margin-top: 0;
                 color: #666;
                 letter-spacing: 0;
