@@ -7,6 +7,7 @@ import CourseContent from "../pages/Learner/CourseContent.vue"
 import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
 import ThreadReplies from "../pages/Learner/ThreadReplies.vue"
 import AdminHome from "../pages/Admin/AdminHome.vue"
+import InstructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
 
 import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
@@ -32,6 +33,15 @@ const routes = [
       allowAnonymous: true
     }
   },
+  {
+    path: '/instructordashboard',
+    name: 'Instructor Home',
+    component: InstructorDashboard,
+    meta: {
+      allowAnonymous: true
+    }
+  },
+  
   {
     path: '/courses/info/:course_id',
     name: 'CourseInfo',

@@ -149,7 +149,7 @@ export default {
           this.$router.push({path: '/courses'});
         }
         else{
-          this.$router.push({path: '/'});          
+          this.$router.push({path: '/instructordashboard'});          
         }
       } 
       catch (error) {
