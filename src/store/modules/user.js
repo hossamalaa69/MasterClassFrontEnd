@@ -29,6 +29,7 @@ const actions = {
                     localStorage.setItem("name", res.data.user.name);
                     localStorage.setItem("userImageUrl", res.data.user.image);
                     localStorage.setItem("username", res.data.user.user_name);
+                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.image);
                     resolve();
                 })
                 .catch(error => {
@@ -54,7 +55,7 @@ const actions = {
                     localStorage.setItem("name", res.user.name);
                     localStorage.setItem("username", res.user.user_name);
                     localStorage.setItem("userType", res.user.type);
-
+                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.user.image);
                     resolve(res.user.type);
                 })
                 .catch(error => {

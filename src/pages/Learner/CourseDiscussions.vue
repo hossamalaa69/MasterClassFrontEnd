@@ -2,9 +2,7 @@
   <v-app>
       <navbar />
       <div class="discussion-grid"> 
-        
         <div class="tip-new-thread-div"> 
-            
           <v-card
               class="mx-auto"
               width="100%"
@@ -51,14 +49,13 @@
                   <v-img
                     class="elevation-6"
                     alt="user-image"
-                    src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+                    :src="userImageUrl"
                   ></v-img>
                 </v-list-item-avatar>
 
                 <v-row
                   align="center"
-                  justify="end"
-                >
+                  justify="end">
                   <v-icon class="mr-1 icon-send" @click="AddThread">
                     mdi-message-plus
                   </v-icon>
@@ -94,10 +91,12 @@ export default {
             threadInput: '',
             response: {},
             loadingState: true,
-            threads: []
+            threads: [],
+            userImageUrl: ''
         }
   },
   async mounted(){
+        this.userImageUrl = localStorage.getItem('imageUrl');
         console.log("Mounted threads page");
         try{
             this.response = await this.$store.dispatch("getThreads", {
@@ -129,11 +128,13 @@ export default {
                 course_id : this.course_id
             });
             const res = this.response.data.comment;
+            console.log(res);
             const thread_new = {
               id: res.id,
               course_id: res.course_id,
               body: this.threadInput,
-              image: "/uploads/tmp/1640871201-93034515581950-0181-6257/default.png"
+              image: localStorage.getItem('imageUrl'),
+              user_name: localStorage.getItem('username')
             }
             this.threads.unshift(thread_new);           
             this.threadInput = "";

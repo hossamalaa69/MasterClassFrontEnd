@@ -67,7 +67,7 @@ const routes = [
     }
   },
   {
-    path: '/courses/discussions/replies/:thread_id',
+    path: '/courses/discussions/replies/:course_id/:thread_id',
     name: 'ThreadReplies',
     component: ThreadReplies,
     meta: {

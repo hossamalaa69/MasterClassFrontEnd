@@ -33,8 +33,9 @@
                 v-for="(pdf, index) in pdfs" 
                 :key="index"
                 :href="pdf" 
+                target="_blank"
                 download>
-                    PDF {{index+1}}
+                    Part {{index+1}}
                 </a>    
             </div>
         </div>        
