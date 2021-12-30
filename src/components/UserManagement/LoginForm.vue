@@ -145,8 +145,11 @@ export default {
         if(userType == 'admin') {
           this.$router.push({path: '/admin'})
         }
-        else {
+        else if(userType == 'learner') {
           this.$router.push({path: '/courses'});
+        }
+        else{
+          this.$router.push({path: '/'});          
         }
       } 
       catch (error) {
