@@ -39,7 +39,7 @@
         </div>    
 
         <div class="course-disc-div"> 
-          <h4> Non graded cell runs with error </h4>
+          <h4> {{parent_body}} </h4>
           <reply-view v-for="reply in replies" :key="reply.id" :reply="reply" />
         </div>  
       </div>
@@ -64,7 +64,8 @@ export default {
             replies: [],
             loadingState: true,
             threadInput: '',
-            userImageUrl: ''
+            userImageUrl: '',
+            parent_body: ''
         }
   },
   methods: {
@@ -79,7 +80,7 @@ export default {
                 parent_id: this.thread_id
             });
             const res = this.response.data.comment;
-            console.log(res);
+            console.log(res);  
             const thread_new = {
               id: res.id,
               course_id: res.course_id,
@@ -87,7 +88,7 @@ export default {
               image: this.userImageUrl,
               user_name: localStorage.getItem('username')
             }
-            this.replies.unshift(thread_new);           
+            this.replies.unshift(thread_new);         
             this.threadInput = "";
         } 
         catch (error) {
@@ -114,6 +115,9 @@ export default {
           this.replies = this.response.data.comments;
           this.replies.reverse();
           console.log(this.replies);
+          this.parent_body = this.replies[0].parent_body;
+          console.log("parent body");
+          console.log(this.parent_body);
           this.loadingState = false;
       } 
       catch (error) {

@@ -14,7 +14,7 @@
                 Reply
           </v-btn>
           <v-list-item style="flex: none">
-            <v-list-item-avatar color="#000d6b">
+            <v-list-item-avatar>
               <v-img
                 class="elevation-6"
                 alt="user-image"
@@ -46,7 +46,8 @@ export default {
       thread: Object
   },
   mounted(){
-    this.thread.image = "http://localhost:3000" + this.thread.image;
+    if(this.thread.image.substring(0,4) != "http")
+        this.thread.image = "http://localhost:3000" + this.thread.image;
   }
 };
 
