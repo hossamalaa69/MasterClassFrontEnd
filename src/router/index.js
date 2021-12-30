@@ -13,7 +13,7 @@ import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
 
 import Profile from "../pages/UserManagement/Profile.vue"
-import instructorDashboard from "../pages/Instructor/instructorDashboard.vue"
+import instructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
 import instructor from '../store/modules/instructor'
 
 Vue.use(VueRouter)
@@ -114,6 +114,13 @@ const routes = [
     component: instructorDashboard,
     meta: {
       allowAnonymous: false
+    },
+    beforeEnter: (to,from,next) => {
+      if(localStorage.getItem('userType') != 'instructor') {
+        next({
+          path: '/courses'
+        })
+      }
     }
   }
   

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import SignupForm from "../../components/UserManagement/SignupForm.vue";
+import SignupForm from "../../components/UserManagement/SignUpForm.vue";
 import Navbar from "../../components/Navbar.vue"
 
 export default {

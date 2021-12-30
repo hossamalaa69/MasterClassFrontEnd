@@ -70,6 +70,7 @@
                     dense
                     type="text"
                     v-model="userInfo.username"
+                    disabled
                     :rules="[required('username')]"
                     ></v-text-field>
                 </v-row>

@@ -11,7 +11,9 @@ const actions = {
                     Authorization: `Bearer ${payload.userToken}`
                 },
                 params: {
-                    user_name : payload.user_name
+                    user_name : payload.user_name,
+                    limit: payload.limit,
+                    offset: payload.offset
                 }
             }
 
