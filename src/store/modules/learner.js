@@ -85,6 +85,27 @@ const actions = {
                 reject(error.response.data);
             })
         })
+    },
+    getSyllabus({ state }, payload) {
+        console.log("Get Syllabus API Payload");
+        console.log(payload);
+        return new Promise((resolve, reject) => {
+            axios.get('/v1/course/activities?limit=10000',
+            {
+                headers: {
+                  Authorization: `Bearer ${payload.userToken}`
+                },
+                params: {
+                    id: payload.id
+                }
+            })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error.response.data);
+            })
+        })
     },    
 
 }

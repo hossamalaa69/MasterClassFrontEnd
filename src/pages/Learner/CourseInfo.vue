@@ -60,6 +60,7 @@ export default {
         return{
             course_id: this.$route.params.course_id,
             course: {},
+            syllabus: {},
             response: {},
             loadingState: true
         }
@@ -76,6 +77,22 @@ export default {
             this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
             console.log("Get Course response");
             console.log(this.course);
+            try{
+                this.response = await this.$store.dispatch("getSyllabus", {
+                    userToken : localStorage.getItem('userToken'),
+                    id: this.course_id
+                });
+                //console.log(this.response.data);
+                this.syllabus = this.response.data;
+                console.log("Get Syallabus response");
+                console.log(this.syllabus);
+                this.loadingState = false;
+            } 
+            catch (error) {
+                console.log("an error occured in get syllabus")
+                this.loadingState = false
+                console.log(error);
+            }
             this.loadingState = false;
         } 
         catch (error) {
