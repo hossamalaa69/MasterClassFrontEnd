@@ -3,9 +3,7 @@
         <h4 v-on:click="openReplies"> 
           Non graded cell runs with error
         </h4>
-        <p> 
-          All previous cells in the second anssignment has passed test and a non graded cell gives error. What to do?
-        </p>
+
         <div class="reply-div">
           <v-btn
                 class="btn-reply-trans">
@@ -63,7 +61,7 @@ export default {
         font-family: "Source Sans Pro", Arial, sans-serif;
         font-weight: 600;
         letter-spacing: -0.1px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         cursor: pointer;
         &:hover{
           text-decoration: underline;

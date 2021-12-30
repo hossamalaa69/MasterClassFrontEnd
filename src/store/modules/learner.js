@@ -40,6 +40,30 @@ const actions = {
                 reject(error.response.data);
             })
         })
+    },    
+    addThread({ state }, payload) {
+        console.log("Add course API Payload");
+        console.log(payload);
+        return new Promise((resolve, reject) => {
+            axios.post('/v1/thread',
+            {
+              comment: {
+                  body: payload.body,
+                  course_id: payload.course_id
+              }
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${payload.userToken}`
+              }
+            })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error.response.data);
+            })
+        })
     },
 }
 

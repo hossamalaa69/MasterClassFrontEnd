@@ -33,8 +33,10 @@
             class="mx-auto"
             width="100%">
             <v-textarea
+                ref="thread_txtarea"
                 style="padding: 10px"
                 full-width
+                v-model="threadInput"
                 color="teal">
                 <template v-slot:label >
                   <div>
@@ -53,15 +55,11 @@
                   ></v-img>
                 </v-list-item-avatar>
 
-                <v-list-item-content>
-                  <v-list-item-title>Hossam Alaa</v-list-item-title>
-                </v-list-item-content>
-
                 <v-row
                   align="center"
                   justify="end"
                 >
-                  <v-icon class="mr-1 icon-send">
+                  <v-icon class="mr-1 icon-send" @click="AddThread">
                     mdi-message-plus
                   </v-icon>
                 </v-row>
@@ -92,8 +90,35 @@ export default {
   },
   data () {
         return{
-            course_id: this.$route.params.course_id
+            course_id: this.$route.params.course_id,
+            userName: localStorage.getItem('name'),
+            threadInput: '',
+            response: {},
+            loadingState: true
         }
+  },
+  methods: {
+    async AddThread(){
+      if(this.threadInput != ''){
+        try{
+            this.response = await this.$store.dispatch("addThread", {
+                userToken : localStorage.getItem('userToken'),
+                body : this.threadInput,
+                course_id : this.course_id
+            });
+            console.log("Add Thread response")
+            console.log(this.response);
+            this.loadingState = false;
+            this.threadInput = "";
+
+        } 
+        catch (error) {
+            console.log("an error occured")
+            this.loadingState = false
+            console.log(error);
+        }
+      }
+    }
   }
 };
 </script>
