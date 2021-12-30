@@ -143,7 +143,7 @@ export default {
           this.$router.push({path: '/admin'})
         }
         else {
-          this.$router.push({path: '/home'});
+          this.$router.push({path: '/courses'});
         }
       } 
       catch (error) {

@@ -59,7 +59,6 @@ const actions = {
                 })
                 .catch(error => {
                     let err = error.response.data
-                    console.log(err)
                     reject(err);
                 });
         });
@@ -88,7 +87,7 @@ const actions = {
                 first_name : payload.first_name,
                 last_name : payload.last_name, 
                 user_name : payload.user_name,
-                user_password: 'password'
+                user_password : payload.user_password
             }
             const config =  {
                 headers: {

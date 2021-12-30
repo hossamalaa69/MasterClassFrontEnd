@@ -1,5 +1,6 @@
 <template>
   <div class="profile">
+    <navbar />
     <v-container fluid fill-height>
       <v-col>
         <profile-form />
@@ -10,10 +11,13 @@
 
 <script>
 import ProfileForm from '../../components/UserManagement/ProfileForm.vue'
+import Navbar from "../../components/Navbar.vue"
+
 export default {
     name: 'Profile',
     components: {
-        ProfileForm
+        ProfileForm,
+        Navbar
     }
 }
 </script>
@@ -21,6 +25,5 @@ export default {
 <style>
 .profile {
     background-color: #1E3163;
-    height: 100%
 }
 </style>
