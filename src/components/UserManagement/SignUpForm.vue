@@ -294,6 +294,12 @@ export default {
         try {
             await this.$store.dispatch("registerUser", this.formData)
             this.loadingState = false;
+            if(this.formData.type == 'learner') {
+                this.$router.push({path: '/courses'});
+            }
+            else{
+                this.$router.push({path: '/'});          
+            }
         } 
         catch (error) {
             console.log("an error occured")

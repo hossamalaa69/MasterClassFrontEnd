@@ -4,7 +4,7 @@
     <v-form v-model="valid" @submit.prevent="onSubmit">
       <v-container>
         <v-row justify="center">
-            <v-col cols="4" class="ml-2 mt-6 mb-6 mr-4" align="center">
+            <v-col cols="11" md='4' class="ml-2 mt-6 mb-6 mr-4" align="center">
                 <v-row justify="center">
                     <v-img
                     :src="userInfo.imageUrl"
@@ -18,8 +18,8 @@
                     </v-img>
                 </v-row>
             </v-col>
-            <v-divider vertical></v-divider>
-            <v-col cols="7" class="ma-6 pa-6">
+            <v-divider vertical class="invisible"></v-divider>
+            <v-col cols="11" md="7" class="ma-6 pa-6">
                 <v-row>
                     <v-text-field
                     background-color="white"
@@ -136,9 +136,9 @@
                 </v-col>
             </v-row>
         <!-- form submission button -->
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-col cols="3">
+            <v-row justify="center" justify-md="end">
+                <!-- <v-spacer></v-spacer> -->
+                <v-col cols="8" md="4">
                     <v-btn
                     block
                     color="#000D6B"
@@ -240,5 +240,15 @@ export default {
 <style scoped>
 .text {
     color: blue;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@media only screen and (min-width: 960px) {
+  .invisible{
+    visibility: visible;
+  }
 }
 </style>
