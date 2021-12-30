@@ -192,7 +192,6 @@ export default {
     async mounted() {
         let token = localStorage.getItem('userToken')
         let response = await this.$store.dispatch('getUserData', {userToken: token});
-        console.log(response)
         let name = response.user.name;
         const firstlastname = name.split(" ");
         this.userInfo.firstname = firstlastname[0];

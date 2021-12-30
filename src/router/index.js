@@ -12,6 +12,8 @@ import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
 
 import Profile from "../pages/UserManagement/Profile.vue"
+import instructorDashboard from "../pages/Instructor/instructorDashboard.vue"
+import instructor from '../store/modules/instructor'
 
 Vue.use(VueRouter)
 
@@ -92,6 +94,14 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile,
+    meta: {
+      allowAnonymous: false
+    }
+  },
+  {
+    path: '/instructor',
+    name : instructor,
+    component: instructorDashboard,
     meta: {
       allowAnonymous: false
     }

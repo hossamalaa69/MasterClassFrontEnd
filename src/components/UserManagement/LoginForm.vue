@@ -78,7 +78,7 @@
             </v-btn>
           </v-col>
         </v-row>
-        <!-- forgot your password -->
+        <!-- forgot your password
         <v-row justify="center" justify-md="center" class="mb-2">
           <div class="white--text"> Forgot your password ? &nbsp;</div>
           <router-link
@@ -90,7 +90,7 @@
             style="color: #F037A5"
             >Let us remind you
           </router-link>
-        </v-row>
+        </v-row> -->
         <!-- to sign up page -->
         <v-row justify="center" justify-md="center" class="mb-2">
           <div class="text-caption white--text">New here ? Why not join us now ? &nbsp;</div>
