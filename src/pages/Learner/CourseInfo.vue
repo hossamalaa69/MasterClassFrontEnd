@@ -25,22 +25,37 @@
                 </div>
             </div>    
         </div>
-        <div class="bookmarks-div"> 
+        <div class="text-center"  v-if="loadingState">
+            <v-progress-circular
+                indeterminate
+                color="primary"
+            ></v-progress-circular>
+        </div>
+        <div class="bookmarks-div" v-if="!loadingState"> 
             <a @click="$vuetify.goTo('#about-div', {duration:500})">About</a>
             <a @click="$vuetify.goTo('#syllabus-div', {duration: 700})">Syllabus</a>
         </div>
-        <div id="about-div">
+        <div id="about-div"  v-if="!loadingState">
             <h4>About this course:</h4> 
             <br/>   
             <pre>{{course.about}}</pre>
         </div>    
-        
-        <div id="syllabus-div">
+        <div id="syllabus-div"  v-if="!loadingState">
             <h4>
                 Syllabus - What you will learn from this course
             </h4>
             <br/>
-            <syllabus-item v-for="week in syllabus" :key="week.activity_name" :week="week"/>      
+            <syllabus-item v-for="week in syllabus" :key="week.activity_name" :week="week"/>    
+            <v-alert
+                v-if="!loadingState && !syllabus.length"            
+                border="left"
+                color="indigo"
+                dark
+                style="text-align: center"
+                width="100%"
+                > No syllabus yet in this course!
+            </v-alert>      
+            
         </div>    
   </v-app>
 </template>

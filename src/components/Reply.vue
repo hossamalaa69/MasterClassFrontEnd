@@ -2,20 +2,20 @@
     <div class="thread-card-div"> 
         <div class="user-info-div">
           <v-list-item style="flex: none">
-            <v-list-item-avatar color="#000d6b">
+            <v-list-item-avatar>
               <v-img
                 class="elevation-6"
                 alt="user-image"
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Blonde&facialHairType=Blank&clotheType=Hoodie&clotheColor=Black&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=White"
+                :src="reply.image"
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title>Mahmoud Amr</v-list-item-title>
+              <v-list-item-title> {{reply.user_name}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </div>
-        <p style="margin-left: 3%; margin-top: 15px"> 
-          Ah, I see my mistake. I was not correctly specifying the 'shape' parameter in the call to tf.reshape. This mistake is not caught by the two tests in one_hot_matrix_test.
+        <p style="margin-left: 3%; margin-top: 15px;word-wrap: break-word;white-space: pre-line; font-size: 1.2rem"> 
+            {{reply.body}}
         </p>
     </div>
 </template>
@@ -29,6 +29,15 @@ export default {
   data () {
         return{
         }
+  },
+  props: {
+    reply: Object
+  },
+  mounted(){
+    console.log("Current Reply")
+    console.log(this.reply);
+    if(this.reply.image.substring(0,4) != "http")
+        this.reply.image = "http://localhost:3000" + this.reply.image
   }
 };
 </script>

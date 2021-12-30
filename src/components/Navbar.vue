@@ -17,10 +17,10 @@
             v-bind="attrs"
             v-on="on"
             icon id="user-img">
-          <v-avatar size="40" color="#000d6b">
+          <v-avatar size="40">
             <img
-              src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-              alt="John">
+              :src="imageUrl"
+              alt="User image">
           </v-avatar>
           </v-btn>           
         </template>
@@ -29,11 +29,11 @@
             <!-- view Profile -->
             <v-list-item row wrap align-center @click="$router.push('/profile')">
               <v-flex md3>
-                <v-avatar size="35" color="#000d6b">
+                <v-avatar size="35">
                 <img
                   width="35" height="35"
-                  src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
-                  alt="John">
+                  :src="imageUrl"
+                  alt="User image">
                 </v-avatar>
               </v-flex>
               <v-flex md9> 
@@ -68,7 +68,8 @@
 export default {
   data(){
     return{
-      userToken: ''
+      userToken: '',
+      imageUrl: ''
     }
   },
   computed: {
@@ -82,6 +83,8 @@ export default {
         localStorage.removeItem("username");
         localStorage.removeItem("name");
         localStorage.removeItem("userType");
+        localStorage.removeItem("imageUrl");
+        
         localStorage.clear();
         this.$router.push({path: '/login'})
     },
@@ -104,6 +107,7 @@ export default {
   },
   mounted() {
     this.userToken = localStorage.getItem("userToken");
+    this.imageUrl = localStorage.getItem("imageUrl");
   }
 };
 </script>

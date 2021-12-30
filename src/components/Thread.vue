@@ -6,6 +6,7 @@
 
         <div class="reply-div">
           <v-btn
+                v-on:click="openReplies"
                 class="btn-reply-trans">
                 <v-icon left>
                   mdi-message-text
@@ -13,7 +14,7 @@
                 Reply
           </v-btn>
           <v-list-item style="flex: none">
-            <v-list-item-avatar color="#000d6b">
+            <v-list-item-avatar>
               <v-img
                 class="elevation-6"
                 alt="user-image"
@@ -21,7 +22,7 @@
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title>Mahmoud Amr</v-list-item-title>
+              <v-list-item-title>{{thread.user_name}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </div>
@@ -38,14 +39,15 @@ export default {
   }),
   methods: {
     openReplies: function () {
-      this.$router.push({path: '/courses/discussions/replies/' + this.thread.id}); 
+      this.$router.push({path: '/courses/discussions/replies/'  + this.thread.course_id + '/' + this.thread.id}); 
     }
   },
   props: {
       thread: Object
   },
   mounted(){
-    this.thread.image = "http://localhost:3000" + this.thread.image;
+    if(this.thread.image.substring(0,4) != "http")
+        this.thread.image = "http://localhost:3000" + this.thread.image;
   }
 };
 
@@ -66,10 +68,12 @@ export default {
         color: #0062e4;
         font-size: 1.25rem;
         line-height: 1.75rem;
+        word-wrap: break-word;
+        white-space: pre-line;
         font-family: "Source Sans Pro", Arial, sans-serif;
         font-weight: 600;
         letter-spacing: -0.1px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         cursor: pointer;
         &:hover{
           text-decoration: underline;
