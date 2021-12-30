@@ -9,9 +9,9 @@ const actions = {
         // console.log(payload);
         return new Promise((resolve, reject) => {
             //send a post request with the user data to the database
-            if(payload.type == "learner") {
+            let url = `/v1/signup/${payload.type}`
                 axios
-                .post("/v1/signup/learner", {
+                .post(url, {
                     email: payload.email,
                     password: payload.password,
                     password_confirmation: payload.passwordConfirmation,
@@ -34,34 +34,6 @@ const actions = {
                 .catch(error => {
                     reject(error.response.data);
                 });
-            }
-            else {
-                axios
-                .post("/v1/signup/instructor", {
-                    email: payload.email,
-                    password: payload.password,
-                    password_confirmation: payload.passwordConfirmation,
-                    first_name : payload.firstname,
-                    last_name : payload.lastname,
-                    user_name : payload.username,
-                    birthday: payload.birthday
-
-                })
-                .then(response => {
-                    let res = response.data
-                    localStorage.setItem("userToken", res.data.access_tokn);
-                    localStorage.setItem("userBirthday", res.data.user.birthday);
-                    localStorage.setItem("userEmail", res.data.user.email);
-                    localStorage.setItem("name", res.data.user.name);
-                    localStorage.setItem("userImageUrl", res.data.user.image);
-                    localStorage.setItem("username", res.data.user.user_name);
-                    resolve();
-                })
-                .catch(error => {
-                    reject(error.response.data);
-                });
-            }
-
         });
     },
     // an action to handle user logging in
@@ -74,21 +46,64 @@ const actions = {
                     password: payload.password,
                 })
                 .then(response => {
+                    console.log(response)
                     let res = response.data.data
                     localStorage.setItem("userToken", res.access_tokn);
                     localStorage.setItem("userBirthday", res.user.birthday);
                     localStorage.setItem("userEmail", res.user.email);
                     localStorage.setItem("name", res.user.name);
                     localStorage.setItem("username", res.user.user_name);
+                    localStorage.setItem("userType", res.user.type);
 
-                    resolve("learner");
+                    resolve(res.user.type);
                 })
                 .catch(error => {
-                    console.log(error)
-                    reject(error.response.data);
+                    let err = error.response.data
+                    reject(err);
                 });
         });
     },
+    getUserData({ state }, payload) {
+        return new Promise((resolve, reject) => {
+            axios
+                .get('/v1/user', {
+                headers: {
+                    Authorization: `Bearer ${payload.userToken}`
+                }
+            })
+                .then(response => {
+                resolve(response.data.data)
+                })
+                .catch(error => {
+                reject(error.response.data)
+                })
+        })
+    },
+    // update learner or instructor general info
+    updateUserInfo({ state }, payload) {
+        return new Promise((resolve, reject) => {
+            const url = `/v1/user/${payload.userType}`
+            const body =  {
+                first_name : payload.first_name,
+                last_name : payload.last_name, 
+                user_name : payload.user_name,
+                user_password : payload.user_password
+            }
+            const config =  {
+                headers: {
+                    Authorization: `Bearer ${payload.userToken}`
+                },
+            }
+            axios
+                .patch(url, body, config)
+                .then(response => {
+                resolve(response.data.data)
+                })
+                .catch(error => {
+                reject(error.response.data)
+                })
+        })
+    }
 }
 
 export default {

@@ -59,7 +59,6 @@
             id="backerr-alert" 
             v-if="errorMessage"
             dense
-            outlined
             type="error">
                 {{ errorMessage }}
             </v-alert>
@@ -70,7 +69,7 @@
           <v-col cols="10">
             <v-btn
               block
-              color="#000D6B"
+              color="#F037A5"
               type="submit"
               large
               class="white--text"
@@ -144,14 +143,14 @@ export default {
           this.$router.push({path: '/admin'})
         }
         else {
-          this.$router.push({path: '/home'});
+          this.$router.push({path: '/courses'});
         }
       } 
       catch (error) {
         this.loadingState = false;
         console.log("an error occured")
-        if(error.status === "fail") {
-          this.errorMessage = error.msg
+        if(error.status === "error") {
+          this.errorMessage = error.errors.message
         }
         else {
           this.errorMessage = "Please try again later !"
