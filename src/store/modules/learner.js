@@ -64,7 +64,29 @@ const actions = {
                 reject(error.response.data);
             })
         })
-    },
+    },    
+    getThreads({ state }, payload) {
+        console.log("Get Threads API Payload");
+        console.log(payload);
+        return new Promise((resolve, reject) => {
+            axios.get('/v1/threads',
+            {
+                headers: {
+                  Authorization: `Bearer ${payload.userToken}`
+                },
+                params: {
+                    course_id: payload.course_id
+                }
+            })
+            .then((response) => {
+                resolve(response.data);
+            })
+            .catch((error) => {
+                reject(error.response.data);
+            })
+        })
+    },    
+
 }
 
 export default {

@@ -71,8 +71,7 @@
         </div>    
         <div class="course-disc-div"> 
           <h4> Discussion Forums </h4>
-        
-          <thread-view v-for="index in 7" :key="index" />
+          <thread-view v-for="thread in threads" :key="thread.id" :thread=thread />
         </div>  
       </div>
   </v-app>
@@ -94,23 +93,50 @@ export default {
             userName: localStorage.getItem('name'),
             threadInput: '',
             response: {},
-            loadingState: true
+            loadingState: true,
+            threads: []
+        }
+  },
+  async mounted(){
+        console.log("Mounted threads page");
+        try{
+            this.response = await this.$store.dispatch("getThreads", {
+                userToken : localStorage.getItem('userToken'),
+                course_id : this.course_id
+            });
+            //console.log("Get Courses Response")
+            //console.log(this.response.data);
+            console.log("Get Threads response")
+            this.threads = this.response.data.threads;
+            this.threads.reverse();
+            console.log(this.threads);
+            this.loadingState = false;
+        } 
+        catch (error) {
+            console.log("an error occured")
+            this.loadingState = false
+            console.log(error);
         }
   },
   methods: {
     async AddThread(){
       if(this.threadInput != ''){
+        this.loadingState = false;
         try{
             this.response = await this.$store.dispatch("addThread", {
                 userToken : localStorage.getItem('userToken'),
                 body : this.threadInput,
                 course_id : this.course_id
             });
-            console.log("Add Thread response")
-            console.log(this.response);
-            this.loadingState = false;
+            const res = this.response.data.comment;
+            const thread_new = {
+              id: res.id,
+              course_id: res.course_id,
+              body: this.threadInput,
+              image: "/uploads/tmp/1640871201-93034515581950-0181-6257/default.png"
+            }
+            this.threads.unshift(thread_new);           
             this.threadInput = "";
-
         } 
         catch (error) {
             console.log("an error occured")

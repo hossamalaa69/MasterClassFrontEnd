@@ -1,7 +1,7 @@
 <template>
     <div class="thread-card-div"> 
         <h4 v-on:click="openReplies"> 
-          Non graded cell runs with error
+          {{thread.body}}
         </h4>
 
         <div class="reply-div">
@@ -17,7 +17,7 @@
               <v-img
                 class="elevation-6"
                 alt="user-image"
-                src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Blonde&facialHairType=Blank&clotheType=Hoodie&clotheColor=Black&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=White"
+                :src="thread.image"
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -35,14 +35,22 @@ export default {
   components: {
   },
   data : () => ({
-      thread_id: 122356
   }),
   methods: {
     openReplies: function () {
-      this.$router.push({path: '/courses/discussions/replies/' + this.thread_id}); 
+      this.$router.push({path: '/courses/discussions/replies/' + this.thread.id}); 
     }
+  },
+  props: {
+      thread: Object
+  },
+  mounted(){
+    this.thread.image = "http://localhost:3000" + this.thread.image;
   }
 };
+
+//-- src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Blonde&facialHairType=Blank&clotheType=Hoodie&clotheColor=Black&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=White"
+
 </script>
 
 <style scoped lang="scss">
@@ -85,3 +93,4 @@ export default {
 }
 
 </style>
+
