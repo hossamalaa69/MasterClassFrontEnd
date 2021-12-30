@@ -12,7 +12,7 @@ import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
 
 import Profile from "../pages/UserManagement/Profile.vue"
-import InstructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
+import InstructorDashboard from "../pages/Instructor/InstructorDB.vue"
 
 Vue.use(VueRouter)
 
