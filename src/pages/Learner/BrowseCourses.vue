@@ -6,7 +6,7 @@
             <p>Welcome back!</p>
         </div>
         <div class="courses-div">
-            <course-card v-for="index in 50" :key="index"/>
+            <course-card v-for="course in courses" :key="course"/>
         </div>
       </div>
   </v-app>
@@ -24,8 +24,33 @@ export default {
   },
   data () {
         return{
+            response: {},
+            courses: [],
+            loadingState: true
         }
-  }
+  },
+    async mounted(){
+        console.log("Mounted Courses page");
+        
+        try{
+            this.response = await this.$store.dispatch("getCourses", {
+                userToken : localStorage.getItem('userToken'),
+                limit : 1000,
+                offset : 0
+            });
+            //console.log("Get Courses Response")
+            //console.log(this.response.data);
+            console.log("Get Courses response")
+            this.courses = this.response.data.courses;
+            console.log(this.courses);
+            this.loadingState = false;
+        } 
+        catch (error) {
+            console.log("an error occured")
+            this.loadingState = false
+            console.log(error);
+        }
+    }
 };
 </script>
 
