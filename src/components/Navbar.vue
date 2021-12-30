@@ -105,9 +105,19 @@ export default {
       }
     }
   },
-  mounted() {
+  async mounted() {
     this.userToken = localStorage.getItem("userToken");
-    this.imageUrl = localStorage.getItem("imageUrl");
+    if(this.userToken) {
+      let temp = localStorage.getItem('imageUrl');
+        if(temp) {
+            this.imageUrl = temp;
+        }
+        else {
+          let response = await this.$store.dispatch('getUserData', {userToken: this.userToken});
+          this.imageUrl = `http://localhost:3000/${response.user.image}`;
+          localStorage.setItem('imageUrl', this.imageUrl)
+        }
+      }
   }
 };
 </script>

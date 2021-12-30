@@ -41,6 +41,13 @@ const routes = [
     component: InstructorDashboard,
     meta: {
       allowAnonymous: true
+    },
+    beforeEnter: (to,from,next) => {
+      if(localStorage.getItem('userType') != 'instructor') {
+        next({
+          path: '/courses'
+        })
+      }
     }
   },
   
@@ -108,23 +115,6 @@ const routes = [
       allowAnonymous: false
     }
   },
-  {
-    path: '/instructor',
-    name : instructor,
-    component: instructorDashboard,
-    meta: {
-      allowAnonymous: false
-    },
-    beforeEnter: (to,from,next) => {
-      if(localStorage.getItem('userType') != 'instructor') {
-        next({
-          path: '/courses'
-        })
-      }
-    }
-  }
-  
-  
 ]
 
 const router = new VueRouter({
