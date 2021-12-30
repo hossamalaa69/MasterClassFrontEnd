@@ -69,7 +69,7 @@
           <v-col cols="10">
             <v-btn
               block
-              color="#F037A5"
+              color="#1E3163"
               type="submit"
               large
               class="white--text"
@@ -80,24 +80,27 @@
         </v-row>
         <!-- forgot your password -->
         <v-row justify="center" justify-md="center" class="mb-2">
+          <div class="white--text"> Forgot your password ? &nbsp;</div>
           <router-link
             :to="{
               path: '/password-reset/reset',
               query: { redirect: this.$route.query.redirect },
             }"
-            class="blue--text"
-            >Forgot Your password ? Let us remind you
+            class="link"
+            style="color: #F037A5"
+            >Let us remind you
           </router-link>
         </v-row>
         <!-- to sign up page -->
         <v-row justify="center" justify-md="center" class="mb-2">
-          <div class="text-caption">New here ? Why not join us now ?</div>
+          <div class="text-caption white--text">New here ? Why not join us now ? &nbsp;</div>
           <router-link
             :to="{
               path: '/signup',
               query: { redirect: this.$route.query.redirect },
             }"
-            class="blue--text text-caption"
+            class="text-caption link"
+            style="color: #F037A5"
             >Sign Up
           </router-link>
         </v-row>
@@ -166,5 +169,8 @@ export default {
   text-align: center;
   font-size: 21px;
   padding-bottom: 10px;
+}
+.link {
+  text-decoration: none;
 }
 </style>

@@ -19,52 +19,82 @@ const routes = [
   {
     path: '/courses',
     name: 'Courses',
-    component: BrowseCourses
+    component: BrowseCourses,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/courses/info/:course_id',
     name: 'CourseInfo',
-    component: CourseInfo
+    component: CourseInfo,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/courses/content/:course_id',
     name: 'CourseContent',
-    component: CourseContent
+    component: CourseContent,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/courses/discussions/:course_id',
     name: 'CourseDiscussions',
-    component: CourseDiscussions
+    component: CourseDiscussions,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/courses/discussions/replies/:thread_id',
     name: 'ThreadReplies',
-    component: ThreadReplies
+    component: ThreadReplies,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/admin',
     name: 'AdminHome',
-    component: AdminHome
+    component: AdminHome,
+    meta: {
+      allowAnonymous: false
+    }
   },
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp
+    component: SignUp,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/Login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: {
+      allowAnonymous: true
+    }
   },
   {
     path: '/profile',
     name: 'Profile',
-    component: Profile
+    component: Profile,
+    meta: {
+      allowAnonymous: false
+    }
   }
   
   
@@ -74,5 +104,38 @@ const router = new VueRouter({
   mode: 'history',
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  if(!RegExp('^/admin').test(to.path) && localStorage.getItem('userType') == 'admin')
+  {
+    next({
+      path: '/admin',
+    });
+  }
+  if (
+    /^\/admin/.test(to.path) &&
+    (!localStorage.getItem('userToken') ||
+      localStorage.getItem('userType') != 'admin')
+  ) {
+    next({
+      path: '/login',
+    });
+  }
+  if (to.name == "Login" && (localStorage.getItem('userToken'))) {
+    next({
+      path: "/courses"
+    });
+  } else if (to.name == "SignUp" && (localStorage.getItem('userToken'))) {
+    next({
+      path: "/courses"
+    });
+  } else if (!to.meta.allowAnonymous && !(localStorage.getItem('userToken'))) {
+    next({
+      path: "/",
+    });
+  }else {
+    next();
+  }
+});
 
 export default router

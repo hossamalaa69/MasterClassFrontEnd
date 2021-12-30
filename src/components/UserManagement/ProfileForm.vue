@@ -73,6 +73,20 @@
                     :rules="[required('username')]"
                     ></v-text-field>
                 </v-row>
+                <v-row>
+                    <v-text-field
+                    background-color="white"
+                    color="#F037A5"
+                    rounded-md
+                    outlined
+                    label="Birth Date"
+                    dense
+                    type="text"
+                    v-model="userInfo.birthday"
+                    disabled
+                    readonly
+                    ></v-text-field>
+                </v-row>
             
             <v-divider/>
             <v-row class="mt-3">
@@ -184,7 +198,10 @@ export default {
         this.userInfo.firstname = firstlastname[0];
         this.userInfo.lastname = firstlastname[1];
         this.userInfo.username = response.user.user_name;
-        this.userInfo.birthday = response.user.birthday;
+
+        const dob = new Date(response.user.birthday)
+        this.userInfo.birthday =  `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
+
         this.userInfo.email = response.user.email;
         this.userInfo.imageUrl = `http://localhost:3000/${response.user.image}`
     },

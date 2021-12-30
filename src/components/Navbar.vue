@@ -5,12 +5,13 @@
       color="#FFFFFF" 
       elevation="4">
       <img
+        @click="$router.push('/')"
         id="logo-img"
         height="40"
         src=""
         alt="Logo" />
       <v-spacer></v-spacer>
-      <v-menu offset-y>
+      <v-menu offset-y v-if="userToken">
         <template v-slot:activator="{ on, attrs }">
           <v-btn 
             v-bind="attrs"
@@ -25,7 +26,8 @@
         </template>
         <v-list width="300">
           <v-list-item-group>
-            <v-list-item row wrap align-center>
+            <!-- view Profile -->
+            <v-list-item row wrap align-center @click="$router.push('/profile')">
               <v-flex md3>
                 <v-avatar size="35" color="#000d6b">
                 <img
@@ -38,16 +40,9 @@
                 <span>View Profile</span>
               </v-flex>
             </v-list-item>
-            
-            <v-list-item row wrap align-center>
-              <v-flex md3>
-                <v-icon class="icons_menu">mdi-wrench</v-icon>
-              </v-flex>
-              <v-flex md9>
-                <span class="spans-menu">Edit Profile</span>
-              </v-flex>  
-            </v-list-item>
-            <v-list-item row wrap align-center >
+            <!-- logout -->
+            <v-list-item row wrap align-center 
+            @click="logout">
               <v-flex md3>
                 <v-icon class="icons_menu">mdi-export</v-icon>
               </v-flex>
@@ -58,6 +53,13 @@
           </v-list-item-group>
         </v-list>
       </v-menu>
+      <v-btn 
+      v-else
+      color="#1E3163"
+      class="white--text"
+      to="/login">
+        Login
+      </v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -66,12 +68,27 @@
 export default {
   data(){
     return{
+      userToken: ''
     }
   },
   computed: {
   },
   methods: {
+    logout: function(){
+        localStorage.removeItem("userToken");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userImageUrl");
+        localStorage.removeItem("userBirthday");
+        localStorage.removeItem("username");
+        localStorage.removeItem("name");
+        localStorage.removeItem("userType");
+        localStorage.clear();
+        this.$router.push({path: '/login'})
+    },
   },
+  mounted() {
+    this.userToken = localStorage.getItem("userToken");
+  }
 };
 </script>
 

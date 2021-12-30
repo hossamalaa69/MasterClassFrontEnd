@@ -2,7 +2,6 @@
     <v-sheet color="#2D46B9" rounded >
         <v-form v-model="formData.valid" @submit.prevent="onSubmit">
             <v-container>
-                <v-row justify="center">
                     <!-- image -->
                 <v-row justify="center" justify-md="center">
                 <v-col cols="12">
@@ -22,7 +21,8 @@
                         <strong> Signup info </strong>
                     </div>
                 </v-row>
-                    <!-- email -->
+                <!-- email -->
+                <v-row justify="center">
                     <v-col cols="11">
                         <v-text-field
                         rounded-md
@@ -36,7 +36,9 @@
                         :rules="[required('email'), checkEmail()]"
                         ></v-text-field>
                     </v-col>
+                </v-row>
                     <!-- username -->
+                <v-row justify="center">
                     <v-col cols="11">
                         <v-text-field
                         rounded-md
@@ -50,7 +52,9 @@
                         :rules="[required('username')]"
                         ></v-text-field>
                     </v-col>
+                </v-row>
                     <!-- password -->
+                <v-row justify="center">
                     <v-col cols="11">
                         <v-text-field
                         rounded-md
@@ -66,7 +70,9 @@
                         :rules=passwordRules
                         ></v-text-field>
                     </v-col>
-                    <!-- password confirmation -->
+                </v-row>
+                <!-- password confirmation -->
+                <v-row justify="center">
                     <v-col cols="11">
                         <v-text-field
                         rounded-md
@@ -83,6 +89,7 @@
                         ></v-text-field>
                     </v-col>
                 </v-row>
+            
                 <v-divider/>
                 <!-- title -->
                 <v-row justify="center">
@@ -158,22 +165,28 @@
                     </v-col>
                 </v-row>
                 <!-- user type -->
-                <v-row justify="center" justify-md="center">
-                <v-radio-group v-model="formData.type" row>
-                    <template v-slot:label> 
-                        <strong class="white--text">Join us as ?</strong> 
-                    </template>
-                    <v-radio value="learner" color="#F8F8F8">
-                    <template v-slot:label>
-                        <strong class="white--text">A learner</strong>
-                    </template>
-                    </v-radio>
-                    <v-radio value="instructor" color="#F8F8F8">
-                    <template v-slot:label>
-                        <strong class="white--text">An instructor</strong>
-                    </template>
-                    </v-radio>
-                </v-radio-group>
+                <v-row>
+                    <v-col>
+                        <v-row justify="center" class="pb-0">
+                            <p>
+                                <strong class="white--text"> Join us as ? </strong>
+                            </p>
+                        </v-row>
+                        <v-row justify="center" class="mt-0 pt-0">
+                            <v-radio-group v-model="formData.type" row>
+                                <v-radio value="learner" color="#F8F8F8">
+                                    <template v-slot:label>
+                                        <strong class="white--text">A learner</strong>
+                                    </template>
+                                </v-radio>
+                                <v-radio value="instructor" color="#F8F8F8">
+                                    <template v-slot:label>
+                                        <strong class="white--text">An instructor</strong>
+                                    </template>
+                                </v-radio>
+                            </v-radio-group>
+                        </v-row>
+                    </v-col>
                 </v-row>
                 <!--hint about joining -->
                 <v-row justify="center" class="mt-0">
@@ -214,13 +227,14 @@
                 </v-col>
                 </v-row>
                 <v-row justify="center" justify-md="center" class="mb-2">
-                <div style="color:#000D6B"><strong>Already a MasterClass member ?</strong></div>
+                <div class="white--text"><strong>Already a MasterClass member ?</strong> &nbsp;</div>
                 <router-link
                     :to="{
                     path: '/login',
                     query: { redirect: this.$route.query.redirect },
                     }"
-                    class="white--text"
+                    class="link"
+                    style="color: #F037A5"
                     >Log in
                 </router-link>
                 </v-row>
@@ -296,6 +310,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    .link {
+        text-decoration: none;
+    }
 </style>
