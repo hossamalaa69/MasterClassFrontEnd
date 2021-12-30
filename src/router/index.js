@@ -7,14 +7,12 @@ import CourseContent from "../pages/Learner/CourseContent.vue"
 import CourseDiscussions from "../pages/Learner/CourseDiscussions.vue"
 import ThreadReplies from "../pages/Learner/ThreadReplies.vue"
 import AdminHome from "../pages/Admin/AdminHome.vue"
-import InstructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
 
 import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
 
 import Profile from "../pages/UserManagement/Profile.vue"
-import instructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
-import instructor from '../store/modules/instructor'
+import InstructorDashboard from "../pages/Instructor/InstructorDashboard.vue"
 
 Vue.use(VueRouter)
 
@@ -37,18 +35,11 @@ const routes = [
   },
   {
     path: '/instructordashboard',
-    name: 'Instructor Home',
+    name: 'InstructorDashboard',
     component: InstructorDashboard,
     meta: {
       allowAnonymous: true
     },
-    beforeEnter: (to,from,next) => {
-      if(localStorage.getItem('userType') != 'instructor') {
-        next({
-          path: '/courses'
-        })
-      }
-    }
   },
   
   {
@@ -76,7 +67,7 @@ const routes = [
     }
   },
   {
-    path: '/courses/discussions/replies/:course_id/:thread_id',
+    path: '/courses/discussions/replies/:thread_id',
     name: 'ThreadReplies',
     component: ThreadReplies,
     meta: {
@@ -115,6 +106,9 @@ const routes = [
       allowAnonymous: false
     }
   },
+ 
+  
+  
 ]
 
 const router = new VueRouter({
