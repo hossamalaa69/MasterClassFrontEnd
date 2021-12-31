@@ -34,7 +34,7 @@
           <v-chip-group active-class="primary--text" column :multiple="false">
             <v-chip class="chip" :href="pdf" target="_blank" download>
               <v-icon left>mdi-file-pdf-box</v-icon>
-              <span>Part {{ index + 1 }}</span>
+              <span>{{ pdf.split('/').slice(-1)[0] }}</span>
             </v-chip>
           </v-chip-group>
         </v-col>

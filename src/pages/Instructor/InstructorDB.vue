@@ -169,9 +169,8 @@ export default {
             newCourse: {
                 name:'',
                 about:'',
-                image:''
+                image:null
             },
-            image:'',
         }
     },
     async mounted() {
@@ -191,6 +190,11 @@ export default {
             try {
                 if (!this.$refs.form.validate()) return
                 await this.$store.dispatch('createCourse', this.newCourse);
+                this.newCourse = {
+                    name:'',
+                    about:'',
+                    image:null
+                }
                 this.getDataFromApi();
                 this.dialog = false;
             } catch (error) {
