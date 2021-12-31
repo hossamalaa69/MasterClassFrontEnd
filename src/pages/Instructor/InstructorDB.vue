@@ -46,6 +46,7 @@
                 <v-card-title>
                 </v-card-title>
                 <v-card-text>
+                <v-form ref="form">
                 <v-row>
                     <v-col cols="12">
                         <template>
@@ -81,7 +82,7 @@
                 >
                     <v-text-field
                     label="Course name*"
-                    required
+                    :rules="[required]"
                     maxlength="20"
                     counter
                     v-model="newCourse.name"
@@ -92,7 +93,7 @@
                 >
                     <v-textarea
                     label="Course Info*"
-                    required
+                    :rules="[required]"
                     clearable
                     counter
                     rows="3"
@@ -104,6 +105,7 @@
                 </v-row>
                 
                 <small>*indicates required field</small>
+                </v-form>
                 </v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
@@ -176,11 +178,18 @@ export default {
         await this.getDataFromApi()
     },
     methods: {
+        required(value) {
+            if (value instanceof Array && value.length == 0) {
+                return "Required.";
+            }
+            return !!value || "Required.";
+        },
         onFileInfo(value) {
 			this.fileInfo = value;
 		},
         async createCourse(){
             try {
+                if (!this.$refs.form.validate()) return
                 await this.$store.dispatch('createCourse', this.newCourse);
                 this.getDataFromApi();
                 this.dialog = false;
