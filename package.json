@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@ashwamegh/vue-link-preview": "^0.2.5",
     "axios": "^0.24.0",
     "core-js": "^3.6.5",
     "randomcolor": "^0.6.2",
