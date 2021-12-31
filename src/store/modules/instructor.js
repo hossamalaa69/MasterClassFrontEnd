@@ -19,13 +19,33 @@ const actions = {
 
             axios.get(url, config)
                 .then(response => {
-                resolve(response.data.data)
+                resolve(response.data)
                 })
                 .catch(error => {
                 reject(error.response.data)
                 })
         })
     },
+    createCourse({state}, payload){
+        return new Promise((resolve, reject) => {
+            axios
+              .post(
+                `/v1/create/course`,
+                payload,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem('userToken')}`
+                  }
+                }
+              )
+              .then(response => {
+                resolve(response.data)
+              })
+              .catch(error => {
+                reject(error.response.data)
+              })
+          })
+        }
 }
 
 export default {
