@@ -54,7 +54,7 @@
             <!-- My Courses (admin &  instructor -->
             <v-list-item row wrap align-center
             v-if="showInstructorDB"
-            @click="$router.push('/instructorDashboard')">
+            @click="$router.push('/instructordashboard')">
               <v-flex md3>
                 <v-icon class="icons_menu">mdi-abacus</v-icon>
               </v-flex>
