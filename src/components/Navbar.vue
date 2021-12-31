@@ -89,9 +89,7 @@ export default {
         this.$router.push({path: '/login'})
     },
     routeToHome: function(){
-      console.log("Routing User to");
       if (localStorage.getItem("userToken") !== null) {
-          console.log("Logged User");
           const userType = localStorage.getItem("userType");
           if(userType == "learner")
               this.$router.push({path: '/courses'});  
@@ -100,7 +98,6 @@ export default {
           else  
               this.$router.push({path: '/admin'})
       }else{
-          console.log("Unlogged User");
           this.$router.push({path: '/'})
       }
     }

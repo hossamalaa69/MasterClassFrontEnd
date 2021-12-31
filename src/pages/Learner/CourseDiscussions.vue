@@ -110,22 +110,16 @@ export default {
   },
   async mounted(){
         this.userImageUrl = localStorage.getItem('imageUrl');
-        console.log("Mounted threads page");
         try{
             this.response = await this.$store.dispatch("getThreads", {
                 userToken : localStorage.getItem('userToken'),
                 course_id : this.course_id
             });
-            //console.log("Get Courses Response")
-            //console.log(this.response.data);
-            console.log("Get Threads response")
             this.threads = this.response.data.threads;
             this.threads.reverse();
-            console.log(this.threads);
             this.loadingState = false;
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             console.log(error);
         }
@@ -141,7 +135,6 @@ export default {
                 course_id : this.course_id
             });
             const res = this.response.data.comment;
-            console.log(res);
             const thread_new = {
               id: res.id,
               course_id: res.course_id,
@@ -153,7 +146,6 @@ export default {
             this.threadInput = "";
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             console.log(error);
         }

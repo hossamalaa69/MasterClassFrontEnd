@@ -211,10 +211,10 @@ export default {
                     instructor_image: this.instructorImageUrl,
                     name: response.courses[i].name,
                     instructor_user_name: this.instructorName,
-                    id: response.courses[i].id
+                    id: response.courses[i].id,
+                    image: response.courses[i].image.url
                 })
             }
-            console.log(response);
         },
         async next (page) {
             this.getDataFromApi(4, page)

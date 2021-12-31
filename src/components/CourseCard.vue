@@ -7,8 +7,9 @@
             />
        </div>
       <div class="course-card-div">
-          <div                 
-                style = "width: 100%; max-width: 100%; height: 100%; max-height: 100%;background-color:#1f6373"
+          <img
+                :src="course.image"
+                style = "width: 100%; max-width: 100%; height: 100%; max-height: 100%;"
           />
           <div class="course-info-div">
               <p id="course-name">{{course.name}}</p>
@@ -32,14 +33,11 @@ export default {
         course: Object
   },
   mounted(){
-      //console.log("Course Card Mounted");
-      //console.log(this.course)
-      //this.course.image = "http://localhost:3000" + this.course.image;
+      this.course.image = "http://localhost:3000" + this.course.image;
       this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
   },
   methods: {
       handleCourseClick: function(){
-        console.log("Course clicked " + this.course.id);
         this.$router.push({path: '/courses/info/'+this.course.id});
       }
   }

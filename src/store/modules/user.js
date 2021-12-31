@@ -5,8 +5,7 @@ const mutations = {}
 const actions = {
     //an action to take user data on registering
     registerUser({ state }, payload) {
-        // console.log("registering user, sending the following");
-        // console.log(payload);
+        // ("registering user, sending the following");
         return new Promise((resolve, reject) => {
             //send a post request with the user data to the database
             let url = `/v1/signup/${payload.type}`
@@ -47,7 +46,6 @@ const actions = {
                     password: payload.password,
                 })
                 .then(response => {
-                    console.log(response)
                     let res = response.data.data
                     localStorage.setItem("userToken", res.access_tokn);
                     localStorage.setItem("userBirthday", res.user.birthday);

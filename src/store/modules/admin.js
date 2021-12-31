@@ -18,7 +18,6 @@ const actions = {
           resolve(response.data)
         })
         .catch(error => {
-          console.log(payload.userToken);
           reject(error.response.data)
         })
     })

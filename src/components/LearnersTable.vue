@@ -187,7 +187,6 @@ export default {
         this.totalCount = this.response.total;
         this.firstLoad = false;
       } catch (error) {
-        console.log("an error occured");
         this.loadingState = false;
         this.errorMessage = error.errors.message;
       }

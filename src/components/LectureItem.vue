@@ -58,8 +58,6 @@ export default {
       lecture: Object
   },
   mounted(){
-      console.log("This lecture is:");
-      console.log(this.lecture);
       this.links = this.lecture.links;
       this.pdfs = this.lecture.pdfs;
       for(const [i, pdf] of this.pdfs.entries())

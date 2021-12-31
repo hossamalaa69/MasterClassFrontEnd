@@ -81,37 +81,28 @@ export default {
         }
   },
     async mounted(){
-        console.log("Mounted Course page");
         try{
             this.response = await this.$store.dispatch("getCourse", {
                 userToken : localStorage.getItem('userToken'),
                 id: this.course_id
             });
-            //console.log(this.response.data);
             this.course = this.response.data;
             this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
-            //console.log("Get Course response");
-            console.log(this.course);
             try{
                 this.response = await this.$store.dispatch("getSyllabus", {
                     userToken : localStorage.getItem('userToken'),
                     id: this.course_id
                 });
-                //console.log(this.response.data);
                 this.syllabus = this.response.data.courses;
-                //console.log("Get Syallabus response");
-                //console.log(this.syllabus);
                 this.loadingState = false;
             } 
             catch (error) {
-                console.log("an error occured in get syllabus")
                 this.loadingState = false
                 console.log(error);
             }
             this.loadingState = false;
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             console.log(error);
         }

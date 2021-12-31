@@ -94,7 +94,6 @@ export default {
                 parent_id: this.thread_id
             });
             const res = this.response.data.comment;
-            console.log(res);  
             const thread_new = {
               id: res.id,
               course_id: res.course_id,
@@ -106,7 +105,6 @@ export default {
             this.threadInput = "";
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             console.log(error);
         }
@@ -114,28 +112,18 @@ export default {
     }
   },
   async mounted(){
-      console.log("Mounted Replies Page");
-      //console.log(this.course_id);
-      //console.log(this.thread_id);
       this.userImageUrl = localStorage.getItem("imageUrl")
       try{
           this.response = await this.$store.dispatch("getReplies", {
               userToken : localStorage.getItem('userToken'),
               thread_id : this.thread_id
           });
-          //console.log("Get Courses Response")
-          //console.log(this.response.data);
-          console.log("Get Replies response")
           this.replies = this.response.data.comments;
           this.replies.reverse();
-          console.log(this.replies);
           this.parent_body = this.replies[0].parent_body;
-          console.log("parent body");
-          console.log(this.parent_body);
           this.loadingState = false;
       } 
       catch (error) {
-          console.log("an error occured")
           this.loadingState = false
           console.log(error);
       }

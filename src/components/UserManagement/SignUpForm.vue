@@ -288,7 +288,6 @@ export default {
     },
     methods: {
         async onSubmit() {
-        console.log("on submit function")
         this.loadingState = true;
         this.errorMessage = "";
         try {
@@ -302,7 +301,6 @@ export default {
             }
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             if(error.status === "error") {
             this.errorMessage = error.errors[0].message
