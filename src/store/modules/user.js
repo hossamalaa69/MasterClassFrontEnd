@@ -22,7 +22,6 @@ const actions = {
                 })
                 .then(response => {
                     let res = response.data.data
-                    console.log
                     localStorage.setItem("userToken", res.access_tokn);
                     localStorage.setItem("userBirthday", res.user.birthday);
                     localStorage.setItem("userEmail", res.user.email);
