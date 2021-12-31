@@ -21,14 +21,16 @@ const actions = {
 
                 })
                 .then(response => {
-                    let res = response.data
-                    localStorage.setItem("userToken", res.data.access_tokn);
-                    localStorage.setItem("userBirthday", res.data.user.birthday);
-                    localStorage.setItem("userEmail", res.data.user.email);
-                    localStorage.setItem("name", res.data.user.name);
-                    localStorage.setItem("userImageUrl", res.data.user.image);
-                    localStorage.setItem("username", res.data.user.user_name);
-                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.image);
+                    let res = response.data.data
+                    console.log
+                    localStorage.setItem("userToken", res.access_tokn);
+                    localStorage.setItem("userBirthday", res.user.birthday);
+                    localStorage.setItem("userEmail", res.user.email);
+                    localStorage.setItem("name", res.user.name);
+                    localStorage.setItem("userImageUrl", res.user.image);
+                    localStorage.setItem("username", res.user.user_name);
+                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.user.image);
+                    localStorage.setItem("userType", payload.type);
                     resolve();
                 })
                 .catch(error => {

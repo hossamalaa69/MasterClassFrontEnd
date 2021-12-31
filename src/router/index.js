@@ -117,12 +117,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(!RegExp('^/admin').test(to.path) && localStorage.getItem('userType') == 'admin')
-  {
-    next({
-      path: '/admin',
-    });
-  }
   if (
     /^\/admin/.test(to.path) &&
     (!localStorage.getItem('userToken') ||
