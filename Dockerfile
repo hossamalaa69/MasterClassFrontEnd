@@ -11,7 +11,7 @@ COPY . .
 
 ARG BACKEND_ROUTE
 
-RUN echo BACKEND_ROUTE_ENV=${BACKEND_ROUTE} > public.env
+RUN echo VUE_APP_BACKEND_ROUTE=${BACKEND_ROUTE} > .env.production
 
 RUN npm run build
 
