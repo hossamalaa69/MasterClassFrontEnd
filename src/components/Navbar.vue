@@ -40,6 +40,40 @@
                 <span>View Profile</span>
               </v-flex>
             </v-list-item>
+            <!-- admin dashboard -->
+             <v-list-item row wrap align-center
+             v-if="showAdminDB"
+            @click="$router.push('/admin')">
+              <v-flex md3>
+                <v-icon class="icons_menu">mdi-account-key</v-icon>
+              </v-flex>
+              <v-flex md9>  
+                <span class="spans-menu">Admin Dashboard</span>
+              </v-flex>  
+            </v-list-item>
+            <!-- My Courses (admin &  instructor -->
+            <v-list-item row wrap align-center
+            v-if="showInstructorDB"
+            @click="$router.push('/instructordashboard')">
+              <v-flex md3>
+                <v-icon class="icons_menu">mdi-abacus</v-icon>
+              </v-flex>
+              <v-flex md9>  
+                <span class="spans-menu">My Courses</span>
+              </v-flex>  
+            </v-list-item>
+            <!-- view courses admin & learner-->
+            <v-list-item row wrap align-center
+            v-if="showCoursesHome"
+            @click="$router.push('/courses')">
+              <v-flex md3>
+                <v-icon class="icons_menu">mdi-book-education</v-icon>
+              </v-flex>
+              <v-flex md9>  
+                <span class="spans-menu">View Courses</span>
+              </v-flex>  
+            </v-list-item>
+
             <!-- logout -->
             <v-list-item row wrap align-center 
             @click="logout">
@@ -69,7 +103,10 @@ export default {
   data(){
     return{
       userToken: '',
-      imageUrl: ''
+      imageUrl: '',
+      showAdminDB: true,
+      showInstructorDB: true,
+      showCoursesHome : true
     }
   },
   computed: {
@@ -89,9 +126,7 @@ export default {
         this.$router.push({path: '/login'})
     },
     routeToHome: function(){
-      console.log("Routing User to");
       if (localStorage.getItem("userToken") !== null) {
-          console.log("Logged User");
           const userType = localStorage.getItem("userType");
           if(userType == "learner")
               this.$router.push({path: '/courses'});  
@@ -100,7 +135,6 @@ export default {
           else  
               this.$router.push({path: '/admin'})
       }else{
-          console.log("Unlogged User");
           this.$router.push({path: '/'})
       }
     }
@@ -108,6 +142,10 @@ export default {
   async mounted() {
     this.userToken = localStorage.getItem("userToken");
     if(this.userToken) {
+      let userType = localStorage.getItem("userType");
+      this.showAdminDB = userType == 'admin';
+      this.showInstructorDB = (userType == 'admin' || userType == 'instructor');
+      this.showCoursesHome = (userType == 'admin' || userType == 'learner');
       let temp = localStorage.getItem('imageUrl');
         if(temp) {
             this.imageUrl = temp;

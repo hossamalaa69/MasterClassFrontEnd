@@ -34,8 +34,6 @@ export default {
     reply: Object
   },
   mounted(){
-    console.log("Current Reply")
-    console.log(this.reply);
     if(this.reply.image.substring(0,4) != "http")
         this.reply.image = "http://localhost:3000" + this.reply.image
   }

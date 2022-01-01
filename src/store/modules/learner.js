@@ -4,8 +4,6 @@ const state = {}
 const mutations = {}
 const actions = {
     getCourses({ state }, payload) {
-        //console.log("Get courses API Payload");
-        //console.log(payload);
         return new Promise((resolve, reject) => {
             axios.get('/v1/courses?limit=1000&offset=0', {
                 headers: {
@@ -21,8 +19,6 @@ const actions = {
         })
     },
     getCourse({ state }, payload) {
-        console.log("Get course API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.get('/v1/course',
             {
@@ -42,8 +38,6 @@ const actions = {
         })
     },    
     addThread({ state }, payload) {
-        console.log("Add Thread API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.post('/v1/thread',
             {
@@ -66,8 +60,6 @@ const actions = {
         })
     },    
     addReply({ state }, payload) {
-        console.log("Add Reply API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.post('/v1/thread',
             {
@@ -91,8 +83,6 @@ const actions = {
         })
     },    
     getThreads({ state }, payload) {
-        console.log("Get Threads API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.get('/v1/threads',
             {
@@ -112,8 +102,6 @@ const actions = {
         })
     },
     getReplies({ state }, payload) {
-        console.log("Get Replies API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.get('/v1/thread/comment',
             {
@@ -133,8 +121,6 @@ const actions = {
         })
     },
     getSyllabus({ state }, payload) {
-        console.log("Get Syllabus API Payload");
-        console.log(payload);
         return new Promise((resolve, reject) => {
             axios.get('/v1/course/activities?limit=10000',
             {

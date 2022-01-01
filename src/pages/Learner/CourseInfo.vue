@@ -218,11 +218,9 @@ export default {
     };
   },
   async mounted() {
-    console.log("Mounted Course page");
     try {
       this.getDataFromApi()
     } catch (error) {
-      console.log("an error occured");
       this.loadingState = false;
       console.log(error);
     }
@@ -280,7 +278,6 @@ export default {
             this.syllabus = this.response.data.courses;
             this.loadingState = false;
         } catch (error) {
-            console.log("an error occured in get syllabus");
             this.loadingState = false;
             console.log(error);
         }

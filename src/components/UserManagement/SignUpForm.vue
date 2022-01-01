@@ -1,6 +1,14 @@
 <template>
     <v-sheet color="#2D46B9" rounded >
         <v-form v-model="formData.valid" @submit.prevent="onSubmit">
+            <v-row justify="center" class="mb-3" v-if="loadingState">
+                <div class="text-center">
+                    <v-progress-circular
+                        indeterminate
+                        color="primary"
+                    ></v-progress-circular>
+                </div>
+            </v-row>
             <v-container>
                     <!-- image -->
                 <v-row justify="center" justify-md="center">
@@ -98,38 +106,39 @@
                     </div>
                 </v-row>
                 <!-- first & last names -->
-                <v-row class="mt-2">
-                    <v-spacer/>
-                    <v-col cols="6">
-                        <v-text-field
-                        class="ml-5"
-                        rounded-md
-                        outlined
-                        color="#F037A5"
-                        background-color="white"
-                        label="Firstname"
-                        dense
-                        type="text"
-                        v-model="formData.firstname"
-                        :rules="[required('firstname')]"
-                        ></v-text-field>
+                <v-row class="mt-2" justify="center">
+                    <!-- <v-spacer/> -->
+                    <v-col cols="11">
+                        <v-row justify="center">
+                            <v-col cols="6">
+                                <v-text-field
+                                rounded-md
+                                outlined
+                                color="#F037A5"
+                                background-color="white"
+                                label="Firstname"
+                                dense
+                                type="text"
+                                v-model="formData.firstname"
+                                :rules="[required('firstname')]"
+                                ></v-text-field>
+                            </v-col>
+                            <v-col cols="6">
+                                <v-text-field
+                                rounded-md
+                                outlined
+                                color="#F037A5"
+                                background-color="white"
+                                label="Lastname"
+                                dense
+                                type="text"
+                                v-model="formData.lastname"
+                                :rules="[required('lastname')]"
+                                ></v-text-field>
+                            </v-col>
+                        </v-row>
                     </v-col>
-                    <v-spacer/>
-                    <v-col cols="6">
-                        <v-text-field
-                        class="mr-5"
-                        rounded-md
-                        outlined
-                        color="#F037A5"
-                        background-color="white"
-                        label="Lastname"
-                        dense
-                        type="text"
-                        v-model="formData.lastname"
-                        :rules="[required('lastname')]"
-                        ></v-text-field>
-                    </v-col>
-                    <v-spacer/>
+                    <!-- <v-spacer/> -->
                 </v-row>
                 <!-- date of birth -->
                 <v-row justify="center">
@@ -257,7 +266,7 @@ export default {
                 firstname : '',
                 lastname : '',
                 username : '',
-                birthday : ''
+                birthday : '1990-1-1'
             },
             dateMenu: false,
             loadingState: false,
@@ -288,7 +297,6 @@ export default {
     },
     methods: {
         async onSubmit() {
-        console.log("on submit function")
         this.loadingState = true;
         this.errorMessage = "";
         try {
@@ -298,11 +306,10 @@ export default {
                 this.$router.push({path: '/courses'});
             }
             else{
-                this.$router.push({path: '/'});          
+                this.$router.push({path: '/instructordashboard'});          
             }
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             if(error.status === "error") {
             this.errorMessage = error.errors[0].message

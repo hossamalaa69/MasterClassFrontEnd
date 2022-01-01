@@ -154,7 +154,6 @@ export default {
       } 
       catch (error) {
         this.loadingState = false;
-        console.log("an error occured")
         if(error.status === "error") {
           this.errorMessage = error.errors.message
         }

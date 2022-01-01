@@ -5,8 +5,7 @@ const mutations = {}
 const actions = {
     //an action to take user data on registering
     registerUser({ state }, payload) {
-        // console.log("registering user, sending the following");
-        // console.log(payload);
+        // ("registering user, sending the following");
         return new Promise((resolve, reject) => {
             //send a post request with the user data to the database
             let url = `/v1/signup/${payload.type}`
@@ -22,14 +21,15 @@ const actions = {
 
                 })
                 .then(response => {
-                    let res = response.data
-                    localStorage.setItem("userToken", res.data.access_tokn);
-                    localStorage.setItem("userBirthday", res.data.user.birthday);
-                    localStorage.setItem("userEmail", res.data.user.email);
-                    localStorage.setItem("name", res.data.user.name);
-                    localStorage.setItem("userImageUrl", res.data.user.image);
-                    localStorage.setItem("username", res.data.user.user_name);
-                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.image);
+                    let res = response.data.data
+                    localStorage.setItem("userToken", res.access_tokn);
+                    localStorage.setItem("userBirthday", res.user.birthday);
+                    localStorage.setItem("userEmail", res.user.email);
+                    localStorage.setItem("name", res.user.name);
+                    localStorage.setItem("userImageUrl", res.user.image);
+                    localStorage.setItem("username", res.user.user_name);
+                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.user.image);
+                    localStorage.setItem("userType", payload.type);
                     resolve();
                 })
                 .catch(error => {
@@ -47,7 +47,6 @@ const actions = {
                     password: payload.password,
                 })
                 .then(response => {
-                    console.log(response)
                     let res = response.data.data
                     localStorage.setItem("userToken", res.access_tokn);
                     localStorage.setItem("userBirthday", res.user.birthday);

@@ -22,7 +22,7 @@ const routes = [
     name: 'Courses',
     component: BrowseCourses,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     }
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     name: 'InstructorDashboard',
     component: InstructorDashboard,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     },
   },
   
@@ -47,7 +47,7 @@ const routes = [
     name: 'CourseInfo',
     component: CourseInfo,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     }
   },
   {
@@ -55,7 +55,7 @@ const routes = [
     name: 'CourseContent',
     component: CourseContent,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     }
   },
   {
@@ -63,15 +63,15 @@ const routes = [
     name: 'CourseDiscussions',
     component: CourseDiscussions,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     }
   },
   {
-    path: '/courses/discussions/replies/:thread_id',
+    path: '/courses/discussions/replies/:course_id/:thread_id',
     name: 'ThreadReplies',
     component: ThreadReplies,
     meta: {
-      allowAnonymous: true
+      allowAnonymous: false
     }
   },
   {
@@ -117,12 +117,6 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if(!RegExp('^/admin').test(to.path) && localStorage.getItem('userType') == 'admin')
-  {
-    next({
-      path: '/admin',
-    });
-  }
   if (
     /^\/admin/.test(to.path) &&
     (!localStorage.getItem('userToken') ||
@@ -131,6 +125,11 @@ router.beforeEach((to, from, next) => {
     next({
       path: '/login',
     });
+  }
+  if (to.name == "InstructorDashboard" && (localStorage.getItem('userType') == "learner")) {
+    next({
+      path: "/courses"
+    })
   }
   if (to.name == "Login" && (localStorage.getItem('userToken'))) {
     next({

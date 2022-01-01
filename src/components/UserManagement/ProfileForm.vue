@@ -224,7 +224,6 @@ export default {
             } 
             catch (error) {
                 this.loadingState = false;
-                console.log("an error occured")
                 if(error.status === "error" || error.status == 401) {
                 this.errorMessage = error.errors[0].message
                 }

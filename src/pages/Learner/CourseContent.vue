@@ -47,14 +47,10 @@ export default {
           userToken : localStorage.getItem('userToken'),
           id: this.course_id
       });
-      //console.log(this.response.data);
       this.syllabus = this.response.data.courses;
-      console.log("Get Content response");
-      console.log(this.syllabus);
       this.loadingState = false;
       } 
       catch (error) {
-          console.log("an error occured in get syllabus")
           this.loadingState = false
           console.log(error);
       }

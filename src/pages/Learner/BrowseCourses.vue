@@ -45,7 +45,6 @@ export default {
         }
   },
     async mounted(){
-        console.log("Mounted Courses page");
         
         try{
             this.response = await this.$store.dispatch("getCourses", {
@@ -53,15 +52,10 @@ export default {
                 limit : 1000,
                 offset : 0
             });
-            //console.log("Get Courses Response")
-            //console.log(this.response.data);
-            console.log("Get Courses response")
             this.courses = this.response.data.courses;
-            console.log(this.courses);
             this.loadingState = false;
         } 
         catch (error) {
-            console.log("an error occured")
             this.loadingState = false
             console.log(error);
         }
