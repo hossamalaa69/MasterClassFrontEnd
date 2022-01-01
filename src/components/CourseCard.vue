@@ -33,9 +33,13 @@ export default {
         course: Object
   },
   watch: { 
-        course: function(newVal, oldVal) { // watch it
-            this.course.image = "http://localhost:3000" + this.course.image;
-            this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+        $props:{
+            immediate: true,
+            deep: true,
+            handler() { // watch it
+                this.course.image = "http://localhost:3000" + this.course.image;
+                this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+            }
         }
   },
   methods: {
