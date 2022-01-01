@@ -152,7 +152,7 @@ export default {
         }
         else {
           let response = await this.$store.dispatch('getUserData', {userToken: this.userToken});
-          this.imageUrl = `http://localhost:3000/${response.user.image}`;
+          this.imageUrl = `${process.env.VUE_APP_BACKEND_ROUTE}${response.user.image}`;
           localStorage.setItem('imageUrl', this.imageUrl)
         }
       }

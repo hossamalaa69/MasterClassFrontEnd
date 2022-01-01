@@ -269,7 +269,7 @@ export default {
         });
         this.course = this.response.data;
         this.course.instructor_image =
-            "http://localhost:3000" + this.course.instructor_image;
+            process.env.VUE_APP_BACKEND_ROUTE + this.course.instructor_image;
         try {
             this.response = await this.$store.dispatch("getSyllabus", {
                 userToken: localStorage.getItem("userToken"),

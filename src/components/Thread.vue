@@ -47,7 +47,7 @@ export default {
   },
   mounted(){
     if(this.thread.image.substring(0,4) != "http")
-        this.thread.image = "http://localhost:3000" + this.thread.image;
+        this.thread.image = process.env.VUE_APP_BACKEND_ROUTE + this.thread.image;
   }
 };
 

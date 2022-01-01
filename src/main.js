@@ -8,7 +8,7 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 //configure axios base url
-axios.defaults.baseURL = 'http://localhost:3000/api'
+axios.defaults.baseURL = process.env.VUE_APP_BACKEND_ROUTE + '/api'
 Vue.use(vuetify)
 new Vue({
   vuetify,

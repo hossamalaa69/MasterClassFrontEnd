@@ -35,7 +35,7 @@ export default {
   },
   mounted(){
     if(this.reply.image.substring(0,4) != "http")
-        this.reply.image = "http://localhost:3000" + this.reply.image
+        this.reply.image = process.env.VUE_APP_BACKEND_ROUTE + this.reply.image
   }
 };
 </script>

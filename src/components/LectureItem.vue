@@ -60,7 +60,7 @@ export default {
     this.links = this.lecture.links;
     this.pdfs = this.lecture.pdfs;
     for (const [i, pdf] of this.pdfs.entries())
-      this.pdfs[i] = "http://localhost:3000" + pdf;
+      this.pdfs[i] = process.env.VUE_APP_BACKEND_ROUTE + pdf;
   },
 };
 </script>

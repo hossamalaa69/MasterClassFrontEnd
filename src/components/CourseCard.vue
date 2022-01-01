@@ -37,8 +37,10 @@ export default {
             immediate: true,
             deep: true,
             handler() { // watch it
-                this.course.image = "http://localhost:3000" + this.course.image;
-                this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+                if (this.course.image.indexOf(process.env.VUE_APP_BACKEND_ROUTE) == -1)
+                    this.course.image = process.env.VUE_APP_BACKEND_ROUTE + this.course.image;
+                if (this.course.instructor_image.indexOf(process.env.VUE_APP_BACKEND_ROUTE) == -1)
+                    this.course.instructor_image = process.env.VUE_APP_BACKEND_ROUTE + this.course.instructor_image;
             }
         }
   },

@@ -28,7 +28,7 @@ const actions = {
                     localStorage.setItem("name", res.user.name);
                     localStorage.setItem("userImageUrl", res.user.image);
                     localStorage.setItem("username", res.user.user_name);
-                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.user.image);
+                    localStorage.setItem("imageUrl", process.env.VUE_APP_BACKEND_ROUTE + res.user.image);
                     localStorage.setItem("userType", payload.type);
                     resolve();
                 })
@@ -54,7 +54,7 @@ const actions = {
                     localStorage.setItem("name", res.user.name);
                     localStorage.setItem("username", res.user.user_name);
                     localStorage.setItem("userType", res.user.type);
-                    localStorage.setItem("imageUrl", "http://localhost:3000" + res.user.image);
+                    localStorage.setItem("imageUrl", process.env.VUE_APP_BACKEND_ROUTE + res.user.image);
                     resolve(res.user.type);
                 })
                 .catch(error => {

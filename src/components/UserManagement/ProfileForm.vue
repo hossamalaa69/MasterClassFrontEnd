@@ -203,7 +203,7 @@ export default {
         this.userInfo.birthday =  `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
 
         this.userInfo.email = response.user.email;
-        this.userInfo.imageUrl = `http://localhost:3000/${response.user.image}`
+        this.userInfo.imageUrl = `${process.env.VUE_APP_BACKEND_ROUTE}${response.user.image}`
     },
     methods: {
         async onSubmit() {
