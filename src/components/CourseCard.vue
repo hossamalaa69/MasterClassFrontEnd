@@ -31,11 +31,10 @@ export default {
   props: {
         course: Object
   },
-  mounted(){
-      //console.log("Course Card Mounted");
-      //console.log(this.course)
-      //this.course.image = "http://localhost:3000" + this.course.image;
-      this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+  watch: { 
+        course: function(newVal, oldVal) { // watch it
+            this.course.instructor_image = "http://localhost:3000" + this.course.instructor_image;
+        }
   },
   methods: {
       handleCourseClick: function(){
