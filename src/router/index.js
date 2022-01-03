@@ -10,6 +10,9 @@ import AdminHome from "../pages/Admin/AdminHome.vue"
 
 import SignUp from "../pages/UserManagement/SignUp.vue"
 import Login from "../pages/UserManagement/Login.vue"
+import ForgotPassword from '../pages/UserManagement/ForgotPassword.vue';
+import PasswordReset from '../components/UserManagement/PasswordReset.vue';
+import PasswordChange from '../components/UserManagement/PasswordChange.vue';
 
 import Profile from "../pages/UserManagement/Profile.vue"
 import InstructorDashboard from "../pages/Instructor/InstructorDB.vue"
@@ -106,7 +109,33 @@ const routes = [
       allowAnonymous: false
     }
   },
- 
+  {
+    path: "/password-reset",
+    name: "forgotpassword",
+    component: ForgotPassword,
+    redirect: "/password-reset/reset",
+    meta : {
+      allowAnonymous : true
+    },
+    children: [
+      {
+        path: "reset",
+        name: "reset",
+        component: PasswordReset,
+        meta : {
+          allowAnonymous : true
+        }
+      },
+      {
+        path: "change/:resettoken",
+        name: "change",
+        component: PasswordChange,
+        meta : {
+          allowAnonymous : true
+        }
+      }
+    ]
+  }
   
   
 ]

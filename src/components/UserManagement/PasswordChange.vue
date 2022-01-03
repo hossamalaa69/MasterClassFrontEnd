@@ -1,0 +1,185 @@
+<template>
+      <v-row justify="center" class="ma-3">
+          <v-spacer></v-spacer>
+          <v-col cols="12" md="6">
+            <v-sheet color="white" rounded="lg">
+                <v-form v-model="valid" @submit.prevent="onSubmit">
+                    <v-row justify="center" v-if="loadingState">
+                        <div class="text-center">
+                            <v-progress-circular
+                                indeterminate
+                                color="#000d6b"
+                            ></v-progress-circular>
+                        </div>
+                    </v-row>
+                    <v-row justify="center">
+                        <div class="text-h4 mt-3">Change Password</div>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-img
+                        src="../../assets/forgotPass.png"
+                        max-width="200px"
+                        aspect-ratio
+                        >
+                        </v-img>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="10">
+                            <div class="text-body-1 tipStyle">Please type Your new Password</div>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <!-- password text field -->
+                        <v-col cols="10">
+                            <v-text-field
+                            rounded-md
+                            outlined
+                            label="Password"
+                            dense
+                            type="password"
+                            v-model="password"
+                            maxlength="30"
+                            counter="30"
+                            :rules="[required('password'), checkLength('password', 8)]"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <!-- password confirmed text field -->
+                        <v-col cols="10">
+                            <v-text-field
+                            rounded-md
+                            outlined
+                            label="confirm Password"
+                            dense
+                            type="password"
+                            v-model="passwordConfirm"
+                            maxlength="30"
+                            counter="30"
+                            :rules="[required('password'), checkLength('password', 8), checkConfirmedPassword()]"
+                            ></v-text-field>
+                        </v-col>
+                    </v-row>
+                    <!-- alert to show that data is updated successfully -->
+                    <v-row justify="center">
+                    <v-col cols = "10">
+                        <v-alert 
+                        id="backsuccess-alert" 
+                        v-if="isSuccessful"
+                        dense
+                        outlined
+                        type="success">
+                        <div> Password Updated Successfully & You are now logged in </div>
+                        </v-alert>
+                    </v-col>
+                    </v-row>
+                    <v-row justify="center">
+                        <v-col cols="6">
+                        <v-btn
+                          block
+                          color="#F037A5"
+                          type="submit"
+                          dense
+                          :to="{path: '/courses'}"
+                          class="white--text"
+                          v-if="isSuccessful"
+                          >To Home Page
+                        </v-btn>
+                        </v-col>
+                    </v-row>
+                    <!-- alert to show any errors returning from back server -->
+                    <v-row justify="center">
+                    <v-col cols = "10">
+                        <v-alert 
+                        id="backerr-alert" 
+                        v-if="errorMessage"
+                        dense
+                        outlined
+                        type="error">
+                            {{ errorMessage }}
+                        </v-alert>
+                    </v-col>
+                    </v-row>
+                    <!-- submission button -->
+                    <v-row justify="center">
+                      <v-col cols="10">
+                        <v-btn
+                          block
+                          color="#000d6b"
+                          type="submit"
+                          large
+                          class="white--text"
+                          :disabled="!valid"
+                          >Submit
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                </v-form>
+            </v-sheet>
+          </v-col>
+          <v-spacer></v-spacer>
+      </v-row>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            valid: true,
+            password: '',
+            passwordConfirm : '',
+            errorMessage: '',
+            isSuccessful: false,
+            resetToken : '',
+            loadingState : false,
+            required(propertyType) {
+              return (v) =>
+                (v && v.length > 0) || `Please enter Your ${propertyType}`;
+            },
+            checkLength(propertyType, minLength) {
+                return (v) =>
+                (v && v.length >= minLength) ||
+                `${propertyType} must be longer than ${minLength} characters`;
+            },
+            checkConfirmedPassword() {
+                return (v) => v == this.password || 'not matching with password !';
+            }
+        }
+    },
+    created() {
+        this.resetToken = this.$route.params.resettoken
+    },
+    methods : {
+        async onSubmit() {
+            try {
+                console.log('On submit')
+                this.errorMessage = ''
+                this.isSuccessful = false;
+                this.loadingState = true;
+                const payload = {
+                    resetToken : this.resetToken,
+                    password : this.password,
+                    passwordConfirm : this.passwordConfirm
+                }
+                let response = await this.$store.dispatch('changePassword', payload)
+                this.loadingState = false;
+                this.isSuccessful = true;
+            } catch (error) {
+                this.loadingState = false;
+                if(error.status === 'error' && error.errors && error.errors.name) {
+                    this.errorMessage = error.errors.name;
+                }
+                else {
+                    this.errorMessage = "Please try again later !";
+                }
+            }
+        }
+    }
+}
+</script>
+
+<style scoped>
+.tipStyle {
+    text-align: center;
+}
+</style>

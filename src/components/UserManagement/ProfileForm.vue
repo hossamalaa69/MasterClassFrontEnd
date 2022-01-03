@@ -30,8 +30,6 @@
                     dense
                     type="email"
                     v-model="userInfo.email"
-                    readonly
-                    disabled
                     ></v-text-field>
                 </v-row>
                 <v-row>
@@ -82,10 +80,8 @@
                     outlined
                     label="Birth Date"
                     dense
-                    type="text"
+                    type="date"
                     v-model="userInfo.birthday"
-                    disabled
-                    readonly
                     ></v-text-field>
                 </v-row>
             
@@ -170,6 +166,7 @@ export default {
                 username: '',
                 userPassword: '',
                 imageUrl: '',
+                birthday: ''
             },
             valid: false,
             loadingState : false,
@@ -200,8 +197,7 @@ export default {
         this.userInfo.username = response.user.user_name;
 
         const dob = new Date(response.user.birthday)
-        this.userInfo.birthday =  `${dob.getFullYear()}-${dob.getMonth() + 1}-${dob.getDate()}`
-
+        this.userInfo.birthday =  `${dob.getFullYear()}-${("0" + (dob.getMonth() + 1)).slice(-2)}-${("0" + dob.getDate()).slice(-2)}`
         this.userInfo.email = response.user.email;
         this.userInfo.imageUrl = `${process.env.VUE_APP_BACKEND_ROUTE}${response.user.image}`
     },
@@ -218,8 +214,19 @@ export default {
                     user_name : this.userInfo.username,
                     user_password: this.userInfo.userPassword,
                     userType : localStorage.getItem('userType'),
-                    userToken : localStorage.getItem('userToken')
+                    userToken : localStorage.getItem('userToken'),
+                    birthday: this.userInfo.birthday == '' ? undefined : this.userInfo.birthday 
                 })
+                localStorage.setItem("userBirthday", this.userInfo.birthday);
+                localStorage.setItem("name", this.userInfo.firstname + " " + this.userInfo.lastname);
+                await this.$store.dispatch("updateUserAuthInfo", 
+                {
+                    user_password: this.userInfo.userPassword,
+                    user_name : this.userInfo.username,
+                    email: this.userInfo.email,
+                    userToken : localStorage.getItem('userToken'),
+                })
+                localStorage.setItem("userEmail", this.userInfo.email);
                 this.successfulRequest = true
             } 
             catch (error) {
