@@ -29,6 +29,7 @@
                     label="Email"
                     dense
                     type="email"
+                    :rules="[checkEmail2()]"
                     v-model="userInfo.email"
                     ></v-text-field>
                 </v-row>
@@ -202,6 +203,10 @@ export default {
         this.userInfo.imageUrl = `${process.env.VUE_APP_BACKEND_ROUTE}${response.user.image}`
     },
     methods: {
+        checkEmail2() {
+            return (v) =>
+            (v && /.+@.+\..+/.test(v)) || "Please enter a valid email address !";
+        },
         async onSubmit() {
             this.errorMessage = ""
             this.successfulRequest = false

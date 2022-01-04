@@ -98,7 +98,7 @@
                         v-model="newLesson.link"
                         chips
                         clearable
-                        :rules="[required]"
+                        :rules="[required, youtubeLink()]"
                         append-icon=""
                         label="Lesson Youtube Links*"
                         multiple
@@ -235,6 +235,19 @@ export default {
         return "Required.";
       }
       return !!value || "Required.";
+    },
+    youtubeLink() {
+      return (v) =>
+      {
+        if (v instanceof Array) {
+          let valid = true
+          v.forEach(val => {
+            valid &&=  (val && /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)&?/.test(val));
+          });
+          return valid || "Please enter a valid youtube link!"
+        }
+        return (v && /(?:https?:\/\/)?(?:www\.)?youtu\.?be(?:\.com)?\/?.*(?:watch|embed)?(?:.*v=|v\/|\/)([\w\-_]+)&?/.test(v)) || "Please enter a valid youtube link!";
+      }
     },
     async createLesson() {
       try {
